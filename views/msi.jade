@@ -1,0 +1,691 @@
+doctype html
+html(lang="x-default")
+  head
+    link(href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", rel="stylesheet")
+    script(src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js")
+          
+    script(src="/js/front/jquery.bxslider-rahisified.min.js")
+
+    link(href="/lib/jquery.bxslider.css", rel="stylesheet")
+
+  body
+    header#header
+      nav.navbar
+        .container-fluid3
+          .custompotal.hidden-xs(style="position:absolute;float:right;right:0;z-index:999;")
+          .navbar-header
+            button.navbar-toggle.btn.collapsed(type="button", data-toggle="collapse", data-target="#navbar-nav-collapse", aria-expanded="false", title="Toggle navigation")
+              span.msicomicon.msicomicon-nav-menu
+                span.sr-only Toggle navigation
+            a.navbar-brand(href="https://latam.msi.com/index.php")
+              img(src="https://latam.msi.com/images/msiLogo_2017.png", alt="MSI®")
+          .navbar-btn-group
+            ul.nav.navbar-nav.navbar-right
+              li
+                a.btn.btn-wtb(href="http://latam.msi.com/service/wheretobuy/#null-", title="Where to Buy")
+                  span.msicomicon.msicomicon-wtb
+                  span.sr-only Where to Buy
+              li.dropdown.user.user-menu
+                a.dropdown-toggle.btn.btn-account.login.hide(data-toggle="dropdown", href="#", title="MSI Account")
+                  span.msicomicon.msicomicon-user
+                  span.sr-only Account
+                ul.dropdown-menu
+                  li.user-header
+                    img.img-circle(src="https://latam.msi.com/images/msi_thumb.png", alt="User Image")
+                    p
+                  li.user-footer
+                    .pull-left
+                      a.btn.btn-default.btn-info(href="https://register.msi.com/member/profile", target="_blank") Profile
+                    .pull-right
+                      a.btn.btn-default.btn-info(href="https://latam.msi.com/homepage/logout") Sign out
+              li.no-login.hide
+                a.btn.btn-account(href="https://register.msi.com/home/login?ref=https://latam.msi.com/", title="MSI Account")
+                  span.msicomicon.msicomicon-user
+                  span.sr-only Account
+              li
+                button.btn.btn-search(title="Search", data-toggle="collapse", data-target="#navbar-search-collapse", aria-expanded="false", aria-controls="navbar-search-collapse")
+                  span.msicomicon.msicomicon-search
+                  span.sr-only Search
+            #navbar-search-collapse.collapse
+              form.navbar-form
+                button#header_search_btn.btn.btn-search(type="submit", title="Search")
+                  span.msicomicon.msicomicon-search
+                  span.sr-only Submit
+                .form-group
+                  label.sr-only(for="header_search_text") Searchterms
+                  input#header_search_text.form-control(type="text", placeholder="Search msi.com")
+                button.btn.btn-close(type="reset", title="Close", data-toggle="collapse", data-target="#navbar-search-collapse", aria-expanded="false", aria-controls="navbar-search-collapse")
+                  span.msicomicon.msicomicon-close
+                  span.sr-only Close
+          #navbar-nav-collapse.collapse.navbar-collapse
+            ul.nav.navbar-nav.topnav
+              li.nav-item-products.dropdown.dropdown-mega
+                a.dropdown-toggle.topnavitem(href="#", data-toggle="dropdown", role="button", aria-haspopup="true", aria-expanded="false") PRODUCTOS
+                .dropdown-menu.dropdown-fullwidth
+                  .container-fluid
+                    .row(style="background-color:#f00;")
+                      .col-xs-12
+                      
+                      
+                      .col-xs-12.col-sm-4.col-navbar
+                        a(href="https://latam.msi.com/Laptops/", title="View all Gaming Series Laptops")
+                          .nav-products-image
+                            img(src="https://latam.msi.com/images/product_nav/laptop.png", alt="Gaming Series Laptops")
+                          span.nav-title Laptops
+                        ul.nav.visible-md.visible-lg
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Laptops/#?tag=Serie-GT", title="View Serie GT")  Serie GT
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Laptops/#?tag=Serie-GS", title="View Serie GS")  Serie GS
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Laptops/#?tag=Serie-GE", title="View Serie GE")  Serie GE
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Laptops/#?tag=Serie-GP", title="View Serie GP")  Serie GP
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Laptops/#?tag=Serie-GL", title="View Serie GL")  Serie GL
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Laptops/#?tag=GF-Series", title="View GF Series")  GF Series
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Laptops/#?tag=GV-Series", title="View GV Series")  GV Series
+                      .col-xs-12.col-sm-4.col-navbar
+                        a(href="https://latam.msi.com/Backpacks/#?category=Backpack-PC", title="View all Gaming Series VR Backpack PC")
+                          .nav-products-image
+                            img(src="https://latam.msi.com/images/product_nav/vrone.png", alt="Gaming Series VR Backpack PC")
+                          span.nav-title VR Backpack PC
+                        ul.nav.visible-md.visible-lg
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Backpacks/#?category=Backpack-PC/Backpacks/#?category=Backpack-PC", title="View VR One")  VR One
+                      .col-xs-12.col-sm-4.col-navbar
+                        a(href="https://latam.msi.com/Desktops/", title="View all Gaming Series Desktops")
+                          .nav-products-image
+                            img(src="https://latam.msi.com/images/product_nav/desktop.png", alt="Gaming Series Desktops")
+                          span.nav-title ESCRITORIO
+                        ul.nav.visible-md.visible-lg
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Vortexs#?category=Vortex", title="View Serie Vortex")  Serie Vortex
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Desktops/#?tag=Serie-Aegis", title="View Serie Aegis")  Serie Aegis
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Desktops/#?tag=Infinite-Series", title="View Infinite Series")  Infinite Series
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Desktops/#?tag=Serie-Nightblade", title="View Serie Nightblade")  Serie Nightblade
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Desktops/#?tag=Trident-Series", title="View Serie Trident")  Serie Trident
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://www.msi.com/Barebones/#?category=Gaming-series", title="View Barebone Series")  Barebone Series
+                      .col-xs-12.col-sm-4.col-navbar
+                        a(href="https://latam.msi.com/Graphics-cards/", title="View all Gaming Series Graphics Cards")
+                          .nav-products-image
+                            img(src="https://latam.msi.com/images/product_nav/vga.png", alt="Gaming Series Graphics Cards")
+                          span.nav-title Tarjeta Gráfica
+                        ul.nav.visible-md.visible-lg
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Graphics-cards/#?tag=GAMING", title="View Serie GAMING")  Serie GAMING
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Graphics-cards/#?tag=SEA-HAWK-Series", title="View SEA HAWK Series")  SEA HAWK Series
+                      .col-xs-12.col-sm-4.col-navbar
+                        a(href="https://latam.msi.com/Motherboards/", title="View all Gaming Series Motherboards")
+                          .nav-products-image
+                            img(src="https://latam.msi.com/images/product_nav/mb.png", alt="Gaming Series Motherboards")
+                          span.nav-title Placa Madre
+                        ul.nav.visible-md.visible-lg
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Motherboards/#?tag=Enthusiast-GAMING", title="View Enthusiast GAMING")  Enthusiast GAMING
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Motherboards/#?tag=Performance-GAMING", title="View Performance GAMING")  Performance GAMING
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Motherboards/#?tag=Arsenal-GAMING", title="View Arsenal GAMING")  Arsenal GAMING
+                      .col-xs-12.col-sm-4.col-navbar
+                        a(href="https://latam.msi.com/All-in-One-PCs/", title="View all Gaming Series All-in-One PCS")
+                          .nav-products-image
+                            img(src="https://latam.msi.com/images/product_nav/aio.png", alt="Gaming Series All-in-One PCS")
+                          span.nav-title PC All-in-One
+                        ul.nav.visible-md.visible-lg
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/All-in-One-PCs/#?category=Serie-Gaming", title="View Serie GAMING")  Serie GAMING
+                      .col-xs-12.col-sm-4.col-navbar
+                        a(href="https://latam.msi.com/Gaming-gear/", title="View all Gaming Series Accessories")
+                          .nav-products-image
+                            img(src="https://latam.msi.com/images/product_nav/accessories.png", alt="Gaming Series Accessories")
+                          span.nav-title Gear
+                        ul.nav.visible-md.visible-lg
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Gaming-gear/#category_1152", title="View Teclados")  Teclados
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Gaming-gear/#category_1154", title="View Mice")  Mice
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Gaming-gear/#category_1226", title="View Headsets")  Headsets
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Gaming-gear/#category_1153", title="View Mousepads")  Mousepads
+                    .row(style="background-color:#222;")
+                      .col-xs-12
+                        
+                      .col-xs-12.col-sm-4.col-navbar
+                        a(href="https://latam.msi.com/Laptops/", title="View all NOTEBOOKS/LAPTOPS")
+                          span.nav-title NOTEBOOKS/LAPTOPS
+                        ul.nav.visible-md.visible-lg
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Laptops/#?tag=Serie-PX", title="View Serie Prestige")  Serie Prestige
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Laptops/#?tag=Serie-CX", title="View Serie Classic")  Serie Classic
+                        a(href="https://latam.msi.com/Workstations/", title="View all WORKSTATIONS MÓVILES")
+                          span.nav-title WORKSTATIONS MÓVILES
+                        ul.nav.visible-md.visible-lg
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Workstations/#?w-tag=WT", title="View Serie WT")  Serie WT
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Workstations/#?w-tag=WS", title="View Serie WS")  Serie WS
+                      .col-xs-12.col-sm-4.col-navbar
+                        a(href="https://latam.msi.com/Desktops/", title="View all ESCRITORIO")
+                          span.nav-title ESCRITORIO
+                        ul.nav.visible-md.visible-lg
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Desktops/#?tag=Pro-Series", title="View Serie Mini PC")  Serie Mini PC
+                      .col-xs-12.col-sm-4.col-navbar
+                        a(href="https://latam.msi.com/Graphics-cards/", title="View all Tarjetas Gráficas")
+                          span.nav-title Tarjetas Gráficas
+                        ul.nav.visible-md.visible-lg
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Graphics-cards/#?tag=Serie-ARMOR", title="View Serie ARMOR")  Serie ARMOR
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Graphics-cards/#?tag=GeForce-GTX-1080", title="View Serie NVIDIA")  Serie NVIDIA
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Graphics-cards/#?tag=Serie-AERO", title="View Serie AERO")  Serie AERO
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Graphics-cards/#?tag=Serie-OVERCLOCKING", title="View Serie OVERCLOCKING")  Serie OVERCLOCKING
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Graphics-cards/#?tag=Serie-CLASSIC", title="View Serie CLASSIC")  Serie CLASSIC
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Graphics-cards/#?tag=AERO-ITX-Series", title="View AERO ITX Series")  AERO ITX Series
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Graphics-cards/#?tag=Accesorios", title="View Accesorios")  Accesorios
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Graphics-cards/#?tag=Radeon-RX-480", title="View Serie AMD")  Serie AMD
+                      .col-xs-12.col-sm-4.col-navbar
+                        a(href="https://latam.msi.com/Motherboards/", title="View all Placas Madre")
+                          span.nav-title Placas Madre
+                        ul.nav.visible-md.visible-lg
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Motherboards/#?tag=Serie-PRO", title="View Serie Pro")  Serie Pro
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/Motherboards/#?tag=Cooler", title="View Cooler")  Cooler
+                      .col-xs-12.col-sm-4.col-navbar
+                        a(href="https://latam.msi.com/All-in-One-PCs/", title="View all PCs All-in-One")
+                          span.nav-title PCs All-in-One
+                        ul.nav.visible-md.visible-lg
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/All-in-One-PCs/#?category=Serie-Profesional", title="View Serie Pro")  Serie Pro
+                          li
+                            a.msicomicon.msicomicon-nav-bullet(href="https://latam.msi.com/All-in-One-PCs/#?category=Serie-Adora", title="View Serie Adora")  Serie Adora
+                    .row(style="background-color:#414141;")
+                      .col-xs-12
+                      
+                      .col-xs-12.col-sm-4.col-md-1-7
+                        a.nav-item-(href="http://server.msi.com/", title="View all SERVER products", target="_self")
+                          span.nav-title SERVER
+                      .col-xs-12.col-sm-4.col-md-1-7
+                        a.nav-item-(href="http://ipc.msi.com/", title="View all IPC products", target="_self")
+                          span.nav-title IPC
+                      .col-xs-12.col-sm-4.col-md-1-7
+                        a.nav-item-(href="http://ce.msi.com/", title="View all CE products", target="_self")
+                          span.nav-title CE
+                      .col-xs-12.col-sm-4.col-md-1-7
+                        a.nav-item-funtoro(href="http://www.funtoro.com", title="View all FUNTORO products", target="_self")
+                          img(src="https://latam.msi.com/images/imgs/funtoro-logo.svg", alt="FUNTORO", style="")
+                      .col-xs-12.col-sm-4.col-md-1-7
+                        a.nav-item-something(href="http://somethings.msi.com/", title="View all SomeThings products", target="_self")
+                          img(src="https://latam.msi.com/images/imgs/something-logo.svg", alt="SomeThings", style="")
+                      .clearfix.visible-xs
+              li.nav-item-community.dropdown.dropdown-mega
+                a.dropdown-toggle.topnavitem(href="#", data-toggle="dropdown", role="button", aria-haspopup="true", aria-expanded="false")
+                  | COMUNIDAD
+                  span.caret
+                .dropdown-menu.dropdown-fullwidth
+                  div
+                    .row
+                      .col-sm-1
+                      .col-xs-12.col-sm-2
+                        a.nav-item-icon(href="https://latam.msi.com/page/social-media/", title="", target="_self")
+                          span.msicomicon.msicomicon-socialmedia
+                          span.nav-title MEDIOS SOCIALES
+                      .col-xs-12.col-sm-2
+                        a.nav-item-icon(href="https://latam.msi.com/video", title="", target="_self")
+                          span.msicomicon.msicomicon-video
+                          span.nav-title VIDEOS
+                      .col-xs-12.col-sm-2
+                        a.nav-item-icon(href="https://register.msi.com/reward", title="", target="_self")
+                          span.msicomicon.msicomicon-reward
+                          span.nav-title Reward
+                      .col-xs-12.col-sm-2
+                        a.nav-item-icon(href="https://latam.msi.com/page/forum", title="", target="_self")
+                          span.msicomicon.msicomicon-forum
+                          span.nav-title FOROS
+                      .col-xs-12.col-sm-2
+                        a.nav-item-icon(href="https://www.msi.com/page/Gaming-Team", title="", target="_blank")
+                          span.msicomicon.msicomicon-gamingteams
+                          span.nav-title GAMING TEAMS
+              li.nav-item-featured.dropdown.dropdown-mega
+                a.dropdown-toggle.topnavitem(href="#", data-toggle="dropdown", role="button", aria-haspopup="true", aria-expanded="false") Lo nuevo
+                .dropdown-menu.dropdown-fullwidth
+                  .container-fluid
+                    .row
+                      .col-xs-12.col-md-8
+                        .row.landing_row_main(style="")
+                          .col-xs-12(style="padding-right:35px;")
+                            a.nav-item-icon(href="https://latam.msi.com/Whats_new/", title="View all featured")
+                              span.msicomicon.msicomicon-fire
+                              span.nav-title.pull-left Showcase Arena
+                              span.nav-viewall.pull-right Ver todo
+                        .row.hidden-xs.landing_row_main
+                          .col-xs-12.col-sm-6.col-md-6.col-lg-5
+                            .nav-item-jumbotron(style="width:99%;")
+                              a(href="https://latam.msi.com/Landing/intel-coffee-lake-z370-gaming-motherboard", title="View Placa madre Z370 - Nacida en el Juego, Construida en la Batalla")
+                                .nav-item-jumbotron-text(style="margin-bottom:10px;")
+                                  span.nav-title Placa madre Z370 - Nacida en el Juego, Construida en la Batalla
+                                .nav-item-jumbotron-image
+                                  img(src="https://www.msi.com/asset/global/picture/promotion/promotion_150588738159c2049560194.jpg", title="Placa madre Z370 - Nacida en el Juego, Construida en la Batalla", alt="")
+                          .col-xs-12.col-sm-6.col-md-6.col-lg-7
+                            .row.landing_row2
+                              .col-xs-6.col-md-6.col-lg-4
+                                .nav-item-jumbotron
+                                  a(href="https://latam.msi.com/Landing/2017-best-motherboard-for-gaming-pc-build", title="View Lo mejor de lo mejor  Placa madre serie 200")
+                                    .nav-item-jumbotron-text
+                                      span.nav-title Lo mejor de lo mejor  Placa madre serie 200
+                                    .nav-item-jumbotron-image
+                                      img(src="https://www.msi.com/asset/latam/picture/promotion/promotion_150605104059c483e04850a.jpg", title="Lo mejor de lo mejor  Placa madre serie 200", alt="")
+                              .col-xs-6.col-md-6.col-lg-4
+                                .nav-item-jumbotron
+                                  a(href="https://latam.msi.com/Landing/intel-optane-memory-motherboard", title="View Placa madre lista para MSI Optane - Boost in a Flash | MSI")
+                                    .nav-item-jumbotron-text
+                                      span.nav-title Placa madre lista para MSI Optane - Boost in a Flash | MSI
+                                    .nav-item-jumbotron-image
+                                      img(src="https://www.msi.com/asset/latam/picture/promotion/promotion_150467798659af9062803c8.jpg", title="Placa madre lista para MSI Optane - Boost in a Flash | MSI", alt="")
+                              .col-xs-6.col-md-6.col-lg-4
+                                .nav-item-jumbotron
+                                  a(href="https://latam.msi.com/Landing/jointhedragon", title="View Join the Dragon – MSI 2017 Amateur Gamers Sponsorship")
+                                    .nav-item-jumbotron-text
+                                      span.nav-title Join the Dragon – MSI 2017 Amateur Gamers Sponsorship
+                                    .nav-item-jumbotron-image
+                                      img(src="https://www.msi.com/asset/global/picture/promotion/promotion_149213703758f0344d17f60.jpg", title="Join the Dragon – MSI 2017 Amateur Gamers Sponsorship", alt="")
+                              .col-xs-6.col-md-6.col-lg-4
+                                .nav-item-jumbotron
+                                  a(href="https://latam.msi.com/Landing/mystic-light-motherboard", title="View PC Case Lighting First Choice – MSI RGB Motherboard & Mystic Light Sync")
+                                    .nav-item-jumbotron-text
+                                      span.nav-title PC Case Lighting First Choice – MSI RGB Motherboard & Mystic Light Sync
+                                    .nav-item-jumbotron-image
+                                      img(src="https://www.msi.com/asset/global/picture/promotion/promotion_149016016658d20a269680a.jpg", title="PC Case Lighting First Choice – MSI RGB Motherboard & Mystic Light Sync", alt="")
+                              .col-xs-6.col-md-6.col-lg-4.visible-lg
+                                .nav-item-jumbotron
+                                  a(href="https://latam.msi.com/Landing/2017-best-gaming-desktop-pc", title="View BEST OF THE BEST GAMING DESKTOP")
+                                    .nav-item-jumbotron-text
+                                      span.nav-title BEST OF THE BEST GAMING DESKTOP
+                                    .nav-item-jumbotron-image
+                                      img(src="https://www.msi.com/asset/global/picture/promotion/promotion_148784199958aeaacfe3e10.jpg", title="BEST OF THE BEST GAMING DESKTOP", alt="")
+                              .col-xs-6.col-md-6.col-lg-4.visible-lg
+                                .nav-item-jumbotron
+                                  a(href="https://latam.msi.com/Landing/AMD-AM4-motherboard-rise-ryzen", title="View AMD AM4 motherboard rise ryzen")
+                                    .nav-item-jumbotron-text
+                                      span.nav-title AMD AM4 motherboard rise ryzen
+                                    .nav-item-jumbotron-image
+                                      img(src="https://www.msi.com/asset/global/picture/promotion/promotion_148767215058ac1356a7776.jpg", title="AMD AM4 motherboard rise ryzen", alt="")
+                      .col-xs-12.col-md-4
+                        .row(style="padding-right:20px;")
+                          .col-xs-12
+                            a.nav-item-icon(href="https://latam.msi.com/blogs/", title="View all featured")
+                              span.msicomicon.msicomicon-blog
+                              span.nav-title.pull-left Artículos de Blog
+                              span.nav-viewall.pull-right Ver todo
+                        .row.hidden-xs
+                          ul.nav.col-xs-12.col-md-12
+              li.nav-item-events-promotions.dropdown.dropdown-mega
+                a.dropdown-toggle.topnavitem(href="#", data-toggle="dropdown", role="button", aria-haspopup="true", aria-expanded="false") EVENTOS Y PROMOCIONES
+                .dropdown-menu.dropdown-fullwidth
+                  .container-fluid
+                    .row
+                      .col-lg-6
+                        .row
+                          .col-xs-12
+                            a.nav-item-icon.pull-left(style="width:100%;", href="https://latam.msi.com/events?span=future", title="View all Upcoming Events")
+                              span.msicomicon.msicomicon-cal
+                              span.nav-title.pull-left Próximos eventos
+                              span.nav-viewall.pull-right Ver todo
+                        .row.hidden-xs
+                          .col-xs-12.col-sm-6
+                            .clearfix
+                            ul.nav.visible-md.visible-lg
+                          .col-xs-12.col-sm-6
+                      .col-lg-6
+                        .row
+                          .col-xs-12
+                            a.nav-item-icon.pull-left(style="width:100%;", href="https://latam.msi.com/Promotions/all/current", title="View all Current Promotions")
+                              span.msicomicon.msicomicon-promo
+                              span.nav-title.pull-left Promociones vigentes
+                              span.nav-viewall.pull-right Ver todo
+                        .row.hidden-xs
+              li
+                a.topnavitem(href="https://latam.msi.com/support/")  SERVICIO
+    .banner_wide
+      ul.banner_list.bxslider(style="display:none;")
+        li
+          a.main_banner(onclick="dataLayer.push({'event':'Banner','eventAction': 'Click','eventCategory':'Banner','eventLabel':'0. Z370'});", href="/Landing/intel-coffee-lake-z370-gaming-motherboard", style="width:100%;height:100%;display:block;", target="_blank", title="Z370")
+            img.img-responsive(src="https://www.msi.com/asset/latam/picture/banner/banner_150658454859cca7e405b44.jpg", alt="Z370")
+        li
+          a.main_banner(onclick="dataLayer.push({'event':'Banner','eventAction': 'Click','eventCategory':'Banner','eventLabel':'1. BEST MB for PC'});", href="https://www.msi.com/Landing/2017-best-motherboard-for-gaming-pc-build", style="width:100%;height:100%;display:block;", target="_blank", title="BEST MB for PC")
+            img.img-responsive(src="https://www.msi.com/asset/latam/picture/banner/banner_150529326659b8f3d265dc4.jpg", alt="BEST MB for PC")
+        li
+          a.main_banner(onclick="dataLayer.push({'event':'Banner','eventAction': 'Click','eventCategory':'Banner','eventLabel':'2. 1080 Ti LIGHTNING'});", href="/Graphics-card/GeForce-GTX-1080-Ti-LIGHTNING-Z.html", style="width:100%;height:100%;display:block;", target="_self", title="1080 Ti LIGHTNING")
+            img.img-responsive(src="https://www.msi.com/asset/latam/picture/banner/banner_1498038003594a3ef3e458c.jpg", alt="1080 Ti LIGHTNING")
+        li
+          a.main_banner(onclick="dataLayer.push({'event':'Banner','eventAction': 'Click','eventCategory':'Banner','eventLabel':'3. MSI Mystic Light Sync'});", href="/Landing/mystic-light-motherboard", style="width:100%;height:100%;display:block;", target="_self", title="MSI Mystic Light Sync")
+            img.img-responsive(src="https://www.msi.com/asset/latam/picture/banner/banner_149034581158d4df5389bf2.jpg", alt="MSI Mystic Light Sync")
+        li
+          a.main_banner(onclick="dataLayer.push({'event':'Banner','eventAction': 'Click','eventCategory':'Banner','eventLabel':'4. Achieve a new level of cool'});", href="https://www.msi.com/Landing/beef-up-your-rig#", style="width:100%;height:100%;display:block;", target="_blank", title="Achieve a new level of cool")
+            img.img-responsive(src="https://www.msi.com/asset/latam/picture/banner/banner_1502680265599114c997685.jpg", alt="Achieve a new level of cool")
+        li
+          a.main_banner(onclick="dataLayer.push({'event':'Banner','eventAction': 'Click','eventCategory':'Banner','eventLabel':'5. Aero ITX'});", href="/Graphics-cards/#?tag=AERO-ITX-Series", style="width:100%;height:100%;display:block;", target="_self", title="Aero ITX")
+            img.img-responsive(src="https://www.msi.com/asset/latam/picture/banner/banner_148755146258aa3be64b699.jpg", alt="Aero ITX")
+        li
+          a.main_banner(onclick="dataLayer.push({'event':'Banner','eventAction': 'Click','eventCategory':'Banner','eventLabel':'6. GeForce GTX 1060/1080 Gaming X+'});", href="/Graphics-card/GeForce-GTX-1080-GAMING-X-Plus-8G.html#hero-overview", style="width:100%;height:100%;display:block;", target="_self", title="GeForce GTX 1060/1080 Gaming X+")
+            img.img-responsive(src="https://www.msi.com/asset/latam/picture/banner/banner_14944886035914161bbef20.jpg", alt="GeForce GTX 1060/1080 Gaming X+")
+        li
+          a.main_banner(onclick="dataLayer.push({'event':'Banner','eventAction': 'Click','eventCategory':'Banner','eventLabel':'7. VR One'});", href="/Backpack/VR-One-7RE.html", style="width:100%;height:100%;display:block;", target="_self", title="VR One")
+            img.img-responsive(src="https://www.msi.com/asset/latam/picture/banner/banner_148832860458b6179c23f27.jpg", alt="VR One")
+        li
+          a.main_banner(onclick="dataLayer.push({'event':'Banner','eventAction': 'Click','eventCategory':'Banner','eventLabel':'8. Trident'});", href="/Desktop/Trident.html", style="width:100%;height:100%;display:block;", target="_self", title="Trident")
+            img.img-responsive(src="https://www.msi.com/asset/latam/picture/banner/banner_147909014958291fe54b307.jpg", alt="Trident")
+        li
+          a.main_banner(onclick="dataLayer.push({'event':'Banner','eventAction': 'Click','eventCategory':'Banner','eventLabel':'9. AMD RX 500 series'});", href="/Graphics-cards/#?tag=Radeon%E2%84%A2-RX-580", style="width:100%;height:100%;display:block;", target="_self", title="AMD RX 500 series")
+            img.img-responsive(src="https://www.msi.com/asset/latam/picture/banner/banner_14944883625914152ac7f77.jpg", alt="AMD RX 500 series")
+        li
+          a.main_banner(onclick="dataLayer.push({'event':'Banner','eventAction': 'Click','eventCategory':'Banner','eventLabel':'10. MSI 7th series'});", href="https://latam.msi.com/Landing/best-meets-best", style="width:100%;height:100%;display:block;", target="_blank", title="MSI 7th series")
+            img.img-responsive(src="https://www.msi.com/asset/latam/picture/banner/banner_1483585086586db63ea90f2.jpg", alt="MSI 7th series")
+        li
+          a.main_banner(onclick="dataLayer.push({'event':'Banner','eventAction': 'Click','eventCategory':'Banner','eventLabel':'11. Aegis-X part2'});", href="/Desktop/Aegis-X.html", style="width:100%;height:100%;display:block;", target="_self", title="Aegis-X part2")
+            img.img-responsive(src="https://www.msi.com/asset/latam/picture/banner/banner_147263431257c69dc886761.png", alt="Aegis-X part2")
+    .container-fluid2
+      .page-container
+        .row.home_max_width2.mb30
+          .col-md-3.col-sm-6.col-xs-6.spotlight
+            div
+              .info(style="text-align:center")
+                h2(style="color:#fff;") PREPARADOS PARA LA RV
+              .pic
+                a(href="http://gaming.msi.com/promotion/vr-ready", target="_blank")
+                  img.img-responsive.hvr-grow(src="https://www.msi.com/asset/latam/picture/spotlight/spotlight_1452500724569366f4b3fcf.jpg", alt="PREPARADOS PARA LA RV")
+          .col-md-3.col-sm-6.col-xs-6.spotlight
+            div
+              .info(style="text-align:center")
+                h2(style="color:#fff;") MOCHILA RV
+              .pic
+                a(href="http://vr.msi.com/", target="_blank")
+                  img.img-responsive.hvr-grow(src="https://www.msi.com/asset/latam/picture/spotlight/spotlight_147513143057ecb8264a754.jpg", alt="MOCHILA RV")
+          .clearfix.visible-sm.visible-xs
+          .col-md-3.col-sm-6.col-xs-6.spotlight
+            div
+              .info(style="text-align:center")
+                h2(style="color:#fff;") MSI Rewards
+              .pic
+                a(href="https://register.msi.com/reward", target="_blank")
+                  img.img-responsive.hvr-grow(src="https://www.msi.com/asset/latam/picture/spotlight/spotlight_147513157957ecb8bbdea73.jpg", alt="MSI Rewards")
+          .col-md-3.col-sm-6.col-xs-6.spotlight
+            div
+              .info(style="text-align:center")
+                h2(style="color:#fff;") MOD S5
+              .pic
+                a(href="https://www.msi.com/Landing/msi-pro-mod", target="_blank")
+                  img.img-responsive.hvr-grow(src="https://www.msi.com/asset/latam/picture/spotlight/spotlight_149181835058eb576e4bb30.jpg", alt="MOD S5")
+        section.row.home_max_width2.home_sp_banner_block
+          h3(style="display:none;") Home Banner
+          a(href="https://www.msi.com/Laptop/GE62VR-7RF-Camo-Squad-Limited-Edition.html", target="_blank")
+            img.img-responsive(src="//asset.msi.com/global/picture/banner/N17_v7.png", alt="Camo Squad")
+        section.row.home_max_width2.home_service_block
+          a(href="http://register.msi.com/", target="_blank")
+            .col-md-1.col-xs-3.home_service_icon
+              img.img-responsive(src="https://latam.msi.com/images/imgs/registerIcon.svg", alt="member center")
+            .col-md-3.col-xs-9(style="text-align:left;")
+              h3 REGISTRO DE PRODUCTOS
+              p.font01 Registra tu producto MSI para disfrutar de los beneficios
+          .clearfix.visible-sm.visible-xs
+          a(href="https://latam.msi.com/support#support_download")
+            .col-md-1.col-xs-3.home_service_icon
+              img.img-responsive(src="https://latam.msi.com/images/imgs/downloadIcon.svg", alt="download center")
+            .col-md-3.col-xs-9(style="text-align:left;")
+              h3 DRIVER y SOFTWARE
+              p.font01 Descarga drivers, manuales, software y más
+          .clearfix.visible-sm.visible-xs
+          a(href="https://latam.msi.com/support")
+            .col-md-1.col-xs-3.home_service_icon
+              img.img-responsive(src="https://latam.msi.com/images/imgs/ServiceCenter.svg", alt="service center")
+            .col-md-3.col-xs-9(style="text-align:left;")
+              h3 CENTROS DE SERVICIO
+              p.font01 Obtén servicio y soporte para tus productos MSI
+        section#bannerMiddle.home_max_width2
+          .row-eq-height
+            .col-xs-12.col-md-6.homeForum
+              .col-md-5
+                | FOROS
+                h2 CONVERSA CON OTROS
+                p.font01
+                  | Busca en la Base de Conocimiento, participa en conversaciones y obtén soporte de otros usuarios
+              .col-md-7.col-lg-3.col-lg-offset-4
+                .btnRed.text-center
+                  a(href="https://forum-en.msi.com/", target="_blank") GLOBAL ENGLISH FORUM
+                .btndarkgray.text-center
+                  a(href="https://latam.msi.com/page/forum") LOCAL FORUMS
+            .col-xs-12.col-md-6.homeFacebook
+              .col-md-5
+                p.text-uppercase MEDIOS SOCIALES
+                h2 CONÉCTATE CON MSI
+                p.font01
+                  | Los canales de MSI en los medios sociales te ofrecen múltiples maneras de comunicarte con nosotros
+              .col-md-7.col-lg-7
+                #twitter.big-section(style="padding-top:50px;")
+                  #twitter-rectangle.row
+                    .col-md-6.col-xs-12
+                      .btnRed.text-center
+                        a(href="https://www.facebook.com/MSIHQFANCLUB/", target="_blank") MSI GLOBAL FB
+                    .col-md-6.col-xs-12
+                      .btnRed.text-center
+                        a(href="https://www.facebook.com/MSIGaming/", target="_blank") MSI GAMING FB
+                    .col-md-6.col-xs-12
+                      .btnRed.text-center
+                        a(href="https://www.instagram.com/msigaming/", target="_blank") MSI GAMING IG
+        .row.home_news_block.home_max_width2
+          .col-md-10.col-md-offset-1
+            section
+              .col-lg-12
+                a(href="https://latam.msi.com/news")
+                  img(src="https://latam.msi.com/images/imgs/news2.svg", height="120", alt="News")
+                a(href="https://latam.msi.com/news")
+                  h3 Ultimas noticias
+                hr.home_news_line
+                a(title="ENTRA A UN NUEVO MUNDO CON LAS NUEVAS PLACAS MADRE MSI Z370 Y PROCESADORES INTEL 8th Gen 6-CORE <br>Disponibles ahora: nuevas placas madre MSI Z370 GAMING", href="https://latam.msi.com/news/detail/p9KsLbNgKXNuFW8QfvkVgCnfXHGxvzwZ9ucB7RZQ0uHCXZqaOb2GKdVw_R0NtJ2wcmqwwhjZRsuF2p2yKUv2Iw~~")
+                  p.font01.home_news_date 05/10/2017
+                  p.font01.home_news_content
+                    | ENTRA A UN NUEVO MUNDO CON LAS NUEVAS PLACAS MADRE MSI Z370 Y PROCESADORES INTEL 8th Gen 6-CORE 
+                    br
+                    | Disponibles ahora: nuevas placas madre MSI Z370 GAMING
+                  p.font01.home_news_more(style="font-weight:900;") Más información
+                a(title="¿Una Laptop Gaming camuflada? MSI lanza la primera <br>laptop con Temática Militar:  Camo Squad Limited Edition GE62VR", href="https://latam.msi.com/news/detail/Si3oObZM7sDIlyWLYD6AhMjon6f0-XwbesMRvjBg8HkKmstBnDnhgnRVXHCwVbnJ9OvviDIOjYWOwVn_CbllRg~~")
+                  p.font01.home_news_date 28/08/2017
+                  p.font01.home_news_content
+                    | ¿Una Laptop Gaming camuflada? MSI lanza la primera 
+                    br
+                    | laptop con Temática Militar:  Camo Squad Limited Edition GE62VR
+                  p.font01.home_news_more(style="font-weight:900;") Más información
+        .youtube-subscribe2
+          script(src="https://apis.google.com/js/platform.js")
+          .g-ytsubscribe(data-channel="MSIGamingGlobal", data-layout="default", data-theme="dark", data-count="default")
+        .row.home_max_width2.home_vidoe_block
+    #fb-root
+    script.
+      (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    link(href="https://latam.msi.com/js/jquery.bxslider5.min.css?ver=2016090906", rel="stylesheet", type="text/css")
+    link(href="https://latam.msi.com/css/web/home.min.css?ver=20161020", rel="stylesheet", type="text/css")
+    script(type="text/javascript", src="https://latam.msi.com/js/jquery.bxslider-rahisified.min.js")
+    script.
+      var video_url = 'https://www.youtube.com/embed/';
+    script(type="text/javascript", src="https://latam.msi.com/js/front/home.min.js?ver=2017080201")
+    footer.footer
+      .row
+        .col-md-11.col-md-offset-1.col-sm-offset-0
+          .col-sm-2.col-md-2.col-lg-2.ftcol
+            a.visible-xs(data-toggle="collapse", href="#list-Community", aria-expanded="true")
+              h2 COMUNIDAD
+            h2.hidden-xs COMUNIDAD
+            ul#list-Community.f01.footer-menu-list
+              li
+                a(href="https://latam.msi.com/page/social-media", target="_self") Medios Sociales
+              li
+                a(href="https://latam.msi.com/page/forum", target="_self") Foros MSI
+              li
+                a(href="https://latam.msi.com/page/Gaming-Team", target="_blank") Gaming Teams
+              li
+                a(href="https://latam.msi.com/video", target="_self") Videos
+          .col-sm-2.col-md-2.col-lg-2.ftcol
+            a.visible-xs(data-toggle="collapse", href="#list-Service", aria-expanded="true")
+              h2 SERVICIO
+            h2.hidden-xs SERVICIO
+            ul#list-Service.f01.footer-menu-list
+              li
+                a(href="https://latam.msi.com/support#support_download", target="_self") Descargas
+              li
+                a(href="https://register.msi.com/", target="_self") Servicio al Cliente Online
+              li
+                a(href="https://latam.msi.com/support/notebook/service-location", target="_self") Centros de Servicio
+              li
+                a(href="https://latam.msi.com/page/warranty", target="_self") Garantía
+          .clearfix.visible-xs
+          .col-sm-2.col-md-2.col-lg-2.ftcol
+            a.visible-xs(data-toggle="collapse", href="#list-News", aria-expanded="true")
+              h2 NOTICIAS
+            h2.hidden-xs NOTICIAS
+            ul#list-News.f01.footer-menu-list
+              li
+                a(href="https://latam.msi.com/news", target="_self") Noticias
+              li
+                a(href="https://latam.msi.com/awards/1/1", target="_self") Premios
+              li
+                a(href="https://latam.msi.com/rss", target="_self") RSS
+          .clearfix.visible-xs
+          .col-sm-2.col-md-2.col-lg-2.ftcol
+            a.visible-xs(data-toggle="collapse", href="#list-Media", aria-expanded="true")
+              h2 MEDIA
+            h2.hidden-xs MEDIA
+            ul#list-Media.f01.footer-menu-list
+              li
+                a(href="https://www.msi.com/page/brochure", target="_blank") Brochure
+              li
+                a(href="https://www.msi.com/page/wallpaper", target="_blank") Wallpaper
+              li
+                a(href="https://www.msi.com/page/msi-apps", target="_blank") MSI Apps
+          .clearfix.visible-xs
+          .col-sm-2.col-md-2.col-lg-2.ftcol
+            a.visible-xs(data-toggle="collapse", href="#list-about", aria-expanded="true")
+              h2 SOBRE MSI
+            h2.hidden-xs SOBRE MSI
+            ul#list-about.f01.footer-menu-list
+              li
+                a(href="https://latam.msi.com/about/profile", target="_self") Visión de MSI
+              li
+                a(href="https://latam.msi.com/about/brand-story", target="_self") Historia de la Marca
+              li
+                a(href="https://latam.msi.com/about/investor", target="_self") Información para Inversores
+              li
+                a(href="https://latam.msi.com/about/Process", target="_blank") Supreme Quality Standard
+              li
+                a(href="https://latam.msi.com/about/innovation", target="_self") ADN de Innovación
+              li
+                a(href="https://latam.msi.com/about/certificate", target="_self") Certificados
+              li
+                a(href="https://latam.msi.com/html/popup/csr/index.html", target="_self") CSR
+          .clearfix.visible-xs
+      .row
+        .col-md-10.col-md-offset-1.quicklinks
+          .col-lg-6
+            span.copyright
+              | Copyright©2017 Micro-Star INT'L CO., LTD. Todos los derechos reservados. Recomendamos el uso de navegador IE8 o posterior.
+          .col-lg-6.col-md-12
+            ul
+              li.col-md-2.col-xs-12
+                a(href="https://latam.msi.com/about/contact-us") Contáctenos
+              li.col-md-2.col-xs-12
+                a(href="https://latam.msi.com/page/privacy-policy") Política de privacidad
+              li.col-md-2.col-xs-12
+                a(href="https://latam.msi.com/page/website-terms-of-use") Términos de uso
+            .footer_bar
+              .language
+                .flag
+                  img(src="https://latam.msi.com/images/front/global.png", alt="language")
+                a(href="http://www.msi.com/language/") Latin America / Español
+            .clear
+    .loading(style="display:none;")
+      div
+      div
+      div
+    link(href="https://latam.msi.com/css/animate.min.css?v=2015", rel="stylesheet", type="text/css")
+    link(href="https://latam.msi.com/css/hover-min.css?v=2015", rel="stylesheet", type="text/css")
+    link(href="https://latam.msi.com/css/web/fix.min.css?v=2015020503", rel="stylesheet", type="text/css")
+    link(href="https://latam.msi.com/css/pmain2.min.css?v=20161005", rel="stylesheet")
+    link(href="https://latam.msi.com/css/navbar.min.css?v=2017081720", rel="stylesheet")
+    link(href="https://latam.msi.com/css/msiNav01.min.css?v=2016083009", rel="stylesheet")
+    .hide cl
+    noscript
+      iframe(src="https://www.googletagmanager.com/ns.html?id=GTM-TQ7TTZ", height="0", width="0", style="display:none;visibility:hidden")
+    script.
+      window.fbAsyncInit = function() {
+      FB.init({
+      appId      : '262220010572515',
+      xfbml      : true,
+      version    : 'v2.10'
+      });
+      FB.AppEvents.logPageView();
+      };
+      (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+      jQuery(document).read(function () {
+      $('a').click(function () {
+      FB.AppEvents.logEvent("linkclick");
+      });
+      });
+    script(type="text/javascript").
+      _atrk_opts = { atrk_acct:"wFBGo1IWx810WR", domain:"msi.com",dynamic: true};
+      (function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://d31qbv1cthcecs.cloudfront.net/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();
+    noscript
+      img(src="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=wFBGo1IWx810WR", style="display:none", height="1", width="1", alt="")
+    script(type="text/javascript").
+      window.cookieconsent_options = {
+      "message":"Medimos anónimamente el uso del sitio web para mejorar su experiencia.",
+      "dismiss":"Got it!",
+      "learnMore":"More info",
+      "link":"http://www.google.co.uk/intl/en/analytics/privacyoverview.html",
+      "theme":"dark-top"
+      };
+    script(type="text/javascript", src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js")
+    script(type="text/javascript", src="https://latam.msi.com/js/jquery.blockUI.min.js")
+    script(type="text/javascript", src="https://latam.msi.com/js/front/common.min.js?ver=2.0.7")
+    script(type="text/javascript", src="https://latam.msi.com/js/wow.min.js")
+    script(type="text/javascript", src="https://latam.msi.com/js/navbar.min.js?v=001")
+    script.
+      new WOW().init();
+    script.
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+      document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '1975462279377467'); // Insert your pixel ID here.
+      fbq('track', 'PageView');
+    noscript
+      img(height="1", width="1", style="display:none", src="https://www.facebook.com/tr?id=1975462279377467&ev=PageView&noscript=1")

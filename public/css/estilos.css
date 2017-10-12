@@ -1,0 +1,43 @@
+#navbarNavDropdown{
+  margin-left: 15%;
+}
+#navbarNavDropdown ul li a{
+  padding: 10px;
+  margin-left: 60px;
+}
+.hero {
+    position: relative;
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    background-size: cover;
+}
+.is-smallslider {
+    height: 420px !important;
+    overflow: hidden;
+    background: #fff;
+}
+.bordertopbottom {
+    border-top: 1px solid #efefef;
+    border-bottom: 1px solid #efefef;
+}
+.is-smallslider-text {
+    width: 100%;
+    cursor: pointer;
+    position: absolute;
+    top: 0px;
+    text-align: center;
+    margin: 25px 0;
+    font-family: Industry-Book;
+    font-size: 30px;
+}
+.z100 {
+    z-index: 100 !important;
+}
+.container-fluid {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.prod{
+  padding: 10px;
+}

@@ -1,0 +1,21 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "parserOptions": {
+    "sourceType": "module",
+  },
+  "env": {
+    "jest": true
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "indent": ["error", 2],
+    "semi": ["error", "never"],
+    "jsx-quotes": ["error", "prefer-double"],
+    "quotes": ["error", "single"]
+  }
+}

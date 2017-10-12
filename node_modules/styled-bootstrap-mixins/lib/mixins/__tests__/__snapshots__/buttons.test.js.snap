@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mixin: buttons button_size should match snapshot 1`] = `
+.c0 {
+  padding: 10px 10px;
+  font-size: 10px;
+  line-height: 1.5;
+  border-radius: 10px;
+}
+
+<div
+  className="c0"
+/>
+`;
+
+exports[`mixin: buttons button_variant should match snapshot 1`] = `
+.c0 {
+  color: red;
+  background-color: #ff0000;
+  border-color: rgb(255,0,0);
+}
+
+.c0:focus,
+.c0.focus {
+  color: red;
+  background-color: #c00;
+  border-color: #800000;
+}
+
+.c0:hover {
+  color: red;
+  background-color: #c00;
+  border-color: #c20000;
+}
+
+.c0:active,
+.c0.active,
+.open > .c0.dropdown-toggle {
+  color: red;
+  background-color: #c00;
+  border-color: #c20000;
+}
+
+.c0:active:hover,
+.c0.active:hover,
+.open > .c0.dropdown-toggle:hover,
+.c0:active:focus,
+.c0.active:focus,
+.open > .c0.dropdown-toggle:focus,
+.c0:active.focus,
+.c0.active.focus,
+.open > .c0.dropdown-toggle.focus {
+  color: red;
+  background-color: #a80000;
+  border-color: #800000;
+}
+
+.c0:active,
+.c0.active,
+.open > .c0.dropdown-toggle {
+  background-image: none;
+}
+
+.c0.disabled:hover,
+.c0[disabled]:hover,
+fieldset[disabled] .c0:hover,
+.c0.disabled:focus,
+.c0[disabled]:focus,
+fieldset[disabled] .c0:focus,
+.c0.disabled.focus,
+.c0[disabled].focus,
+fieldset[disabled] .c0.focus {
+  background-color: #ff0000;
+  border-color: rgb(255,0,0);
+}
+
+.c0 .badge {
+  color: #ff0000;
+  background-color: red;
+}
+
+<div
+  className="c0"
+/>
+`;

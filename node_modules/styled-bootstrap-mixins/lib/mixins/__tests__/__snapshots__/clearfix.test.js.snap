@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mixin: clearfix should match snapshot 1`] = `
+.c0:before,
+.c0:after {
+  content: " ";
+  display: table;
+}
+
+.c0:after {
+  clear: both;
+}
+
+<div
+  className="c0"
+/>
+`;
