@@ -33,7 +33,6 @@ app.get('/productos', (req, res) => {
 })
 
 
-
 app.listen(port, () => {
-  console.log('Inicio puerto ${port}');
+  console.log('Inicio puerto ', port);
 });
