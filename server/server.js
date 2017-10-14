@@ -53,7 +53,23 @@ app.get('/prodBuscar/:id', (req, res) => {
       res.status(400).send();
     });
 });
+//Eliminar
+app.delete('/prodDel/:id',(req, res) =>{
+  var id = req.params.id;
 
+  if (!ObjectID.isValid(id)) {
+    return res.status(404).send();
+  }
+
+  Producto.findByIdAndRemove(id).then((prod) =>{
+    if (!prod) {
+      return res.status(404).send();
+    }
+  res.send(prod);
+  }).catch((e) => {
+  res.status(400).send();
+  });
+});
 app.listen(port, () => {
   console.log('Inicio puerto ', port);
 });
