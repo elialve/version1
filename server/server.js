@@ -4,9 +4,10 @@ var {ObjectID} = require('mongodb');
 
 var {mongoose} = require('./db/mongoose.js');
 var {Producto} = require('./models/producto.js');
+
+var app = express();
 app.set('view engine', 'jade');
 app.use(express.static('public'));
-var app = express();
 const port = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.get('/', function (req, res) {
