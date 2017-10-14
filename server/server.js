@@ -8,7 +8,9 @@ var {Producto} = require('./models/producto.js');
 var app = express();
 const port = process.env.PORT || 3000;
 app.use(bodyParser.json());
-
+app.get('/', function (req, res) {
+  res.render('index', { title: ' Pagina', message: 'Bienvenidos'});
+});
 //Agregar
 app.post('/prodAdd', (req, res) => {
   var prod = new Producto({
@@ -26,6 +28,7 @@ app.post('/prodAdd', (req, res) => {
 
 //Listar
 app.get('/prodList', (req, res) => {
+
     Producto.find().then((prod) => {
       res.send({prod});
     }, (e) => {
