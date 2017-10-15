@@ -41,3 +41,6 @@
 .prod{
   padding: 10px;
 }
+.fa-pull-right, .pull-right{
+  float: left;
+}

@@ -3,11 +3,10 @@ html(lang="x-default")
   head
     meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
     link(href="/css/bootstrap.min.css", rel="stylesheet")
-    link(href="/css/estilos.css", rel="stylesheet")
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
     // Bootstrap core CSS
     link(href='/css/compiled.min.css', rel='stylesheet')
-
+    link(href="/css/estilos.css", rel="stylesheet")
   body
     nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
       .container
@@ -32,7 +31,11 @@ html(lang="x-default")
                    .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
                      a.dropdown-item(href='#') Action      
                      a.dropdown-item(href='#') Another action      
-                     a.dropdown-item(href='#') Something else here 
+                     a.dropdown-item(href='#') Something else here
+                 h1 !{session.cart.totalItems}
+                  
+                   
+
      .hero(style='max-height: 600px;')
       video#videoHero(autoplay='', loop='', preload='', poster='', style='top: 70px; height: auto; width: 100%;', src='/video/suporte-venonpro-blue.mp4')
     .container( style="background-color: white;")
@@ -44,34 +47,18 @@ html(lang="x-default")
           br
        .col-md-4
       .row
-       .col-md-6.col-lg-4.prod
-         .card(style="width: 20rem;")
-           img.card-img-top(src="/img/img1.png", alt="Card image cap") 
-           .card-body
-             h4.card-title Card title
-             p.card-text
-               | Some quick example text to build on the card title and make up the bulk of the card's content.
-             a.btn.btn-primary(href="#") Go somewhere
-             a.btn.btn-primary(href="#") Go somewhere
-       .col-md-6.col-lg-4.prod
-         .card(style="width: 20rem;")
-           img.card-img-top(src="/img/img1.png", alt="Card image cap") 
-           .card-body
-             h4.card-title Card title
-             p.card-text
-               | Some quick example text to build on the card title and make up the bulk of the card's content.
-             a.btn.btn-primary(href="#") Go somewhere
-             a.btn.btn-primary(href="#") Go somewhere
-       .col-md-6.col-lg-4.prod
-         .card(style="width: 20rem;")
-           img.card-img-top(src="/img/img1.png", alt="Card image cap") 
-           .card-body
-             h4.card-title Card title
-             p.card-text
-               | Some quick example text to build on the card title and make up the bulk of the card's content.
-             a.btn.btn-primary(href="#") Go somewhere
-             a.btn.btn-primary(href="#") Go somewhere
-    
+        for result in productos
+          .col-md-6.col-lg-3.prod
+            .card(style="")
+              img.card-img-top(src="/img/img1.png", alt="Card image cap") 
+              .card-body
+                h5.card-title #{result.nombre}
+                p.card-text
+                  | $#{result.precio}
+                a.btn.btn-primary(href="prodBuscar/#{result.id}") Detalles
+                a.btn.btn-default.pull-right(href='/add/#{result.id}', role='button')
+                  i.fa.fa-shopping-cart(aria-hidden='true')
+                  |  Add to cart
 
 
 

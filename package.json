@@ -2,12 +2,12 @@
   "name": "eso",
   "version": "1.0.0",
   "main": "index.js",
-  "description":"",
+  "description": "",
   "scripts": {
-    "start":"node  server/server.js",
+    "start": "node  server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "engines":{
+  "engines": {
     "node": "7.5.0"
   },
   "author": "",
@@ -16,9 +16,11 @@
     "express": "^4.16.1",
     "jade": "^1.11.0",
     "jade-bootstrap": "^1.0.14",
+    "lodash": "^4.17.4",
     "mixin": "^0.2.0",
     "mongodb": "^2.2.31",
     "mongoose": "^4.12.1",
+    "router-express": "^1.5.2",
     "styled-bootstrap-mixins": "^0.1.0",
     "styled-components": "^2.2.1"
   },
