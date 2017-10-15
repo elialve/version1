@@ -30,6 +30,7 @@ app.use(function(req, res, next) {
 });
 
 
+
 app.get('/', function (req, res) {
       Producto.find().then((prod) => {
           res.render('index', { productos : prod});

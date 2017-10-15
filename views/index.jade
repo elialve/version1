@@ -32,8 +32,8 @@ html(lang="x-default")
                      a.dropdown-item(href='#') Action      
                      a.dropdown-item(href='#') Another action      
                      a.dropdown-item(href='#') Something else here
-                 h1 !{session.cart.totalItems}
-                  
+                 if session.cart
+                   h1 !{session.cart.totalItems}
                    
 
      .hero(style='max-height: 600px;')
