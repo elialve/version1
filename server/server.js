@@ -33,7 +33,10 @@ app.use(function(req, res, next) {
 
 app.get('/', function (req, res) {
       Producto.find().then((prod) => {
-          res.render('index', { productos : prod});
+          res.render('index', {
+            title: 'Home',
+            productos : prod
+          });
       }, (e) => {
         res.status(400).send(e);
       });
@@ -63,7 +66,7 @@ app.get('/prodList', (req, res) => {
     });
 })
 //Buscar
-app.get('/prodBuscar/:id', (req, res) => {
+app.get('/detalle/:id', (req, res) => {
     var id = req.params.id;
 
     if (!ObjectID.isValid(id)) {
@@ -73,27 +76,39 @@ app.get('/prodBuscar/:id', (req, res) => {
       if (!prod) {
         return res.status(404).send();
       }
-      res.send({prod});
+      res.render('detalle', { productos : prod});
     }).catch((e) => {
       res.status(400).send();
     });
 });
-
+// Carrito de compras
 
 app.get('/add/:id', function(req, res) {
-  var productId = req.params.id;
-  var cart = new Cart(req.session.cart ? req.session.cart : {});
-  Producto.findById(productId).then((prod) => {
-    if (!prod) {
-      return res.status(404).send();
-    }
-    cart.add(prod, productId);
-    req.session.cart = cart;
-    res.redirect('/');
-  }).catch((e) => {
-    res.status(400).send();
-  });
+  setTimeout(function(){
+    var productId = req.params.id;
+    var cart = new Cart(req.session.cart ? req.session.cart : {});
+    Producto.findById(productId).then((prod) => {
+      if (!prod) {
+        return res.status(404).send();
+      }
+      cart.add(prod, productId);
+      req.session.cart = cart;
+      res.redirect('/');
+    }).catch((e) => {
+      res.status(400).send();
+    });
+  },2000);
+
 });
+
+app.get('/cart', function(req, res) {
+  if (!req.session.cart) {
+    return res.render('cart', {productos: null,title: 'Carrito'});
+  }
+  var cart = new Cart(req.session.cart);
+  res.render('cart', {productos: cart.getItems(),totalPrice: cart.totalPrice,title: 'Carrito'});
+});
+
 //Eliminar
 app.delete('/prodDel/:id',(req, res) =>{
   var id = req.params.id;

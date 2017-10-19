@@ -1,73 +1,26 @@
-doctype html
-html(lang="x-default")
-  head
-    meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
-    link(href="/css/bootstrap.min.css", rel="stylesheet")
-    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
-    // Bootstrap core CSS
-    link(href='/css/compiled.min.css', rel='stylesheet')
-    link(href="/css/estilos.css", rel="stylesheet")
-  body
-    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
-      .container
-        a.navbar-brand(href="#") 
-         img.d-inline-block.align-top(src="/img/logo.png", width="30", height="30", alt="") 
-         | !{title}
-         button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNavDropdown', aria-controls='navbarNavDropdown', aria-expanded='false', aria-label='Toggle navigation')
-             span.navbar-toggler-icon  
-        #navbarNavDropdown.collapse.navbar-collapse
-               ul.navbar-nav
-                 li.nav-item.active
-                   a.nav-link(href='#')
-                     | Home 
-                     span.sr-only (current)   
-                 li.nav-item
-                   a.nav-link(href='#') Features    
-                 li.nav-item
-                   a.nav-link(href='#') Pricing   
-                 li.nav-item.dropdown
-                   a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
-                     | Dropdown link       
-                   .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
-                     a.dropdown-item(href='#') Action      
-                     a.dropdown-item(href='#') Another action      
-                     a.dropdown-item(href='#') Something else here
-                 if session.cart
-                   h1 !{session.cart.totalItems}
-                   
-
-     .hero(style='max-height: 600px;')
-      video#videoHero(autoplay='', loop='', preload='', poster='', style='top: 70px; height: auto; width: 100%;', src='/video/suporte-venonpro-blue.mp4')
-    .container( style="background-color: white;")
-      .row
-       .col-md-4
-       .col-md-4
-          br
-          h1.titProd Productos
-          br
-       .col-md-4
-      .row
-        for result in productos
-          .col-md-6.col-lg-3.prod
-            .card(style="")
-              img.card-img-top(src="/img/img1.png", alt="Card image cap") 
-              .card-body
-                h5.card-title #{result.nombre}
-                p.card-text
-                  | $#{result.precio}
-                a.btn.btn-primary(href="prodBuscar/#{result.id}") Detalles
-                a.btn.btn-default.pull-right(href='/add/#{result.id}', role='button')
-                  i.fa.fa-shopping-cart(aria-hidden='true')
-                  |  Add to cart
-
-
-
-
-   script(type='text/javascript', src='/js/compiled.min.js')
-   |     
-   script(type='text/javascript', src='/js/jarallax.js')
-   |     
-   script(type='text/javascript', src='/js/jarallax-video.js')
-   |     
-   script.
-     new WOW().init();
+extends ./layouts/layout.jade
+block content                 
+       .hero(style='max-height: 600px;')
+        video#videoHero(autoplay='', loop='', preload='', poster='', style='top: 70px; height: auto; width: 100%;', src='/video/suporte-venonpro-blue.mp4')
+       .container( style="background-color: white;")
+        .row
+         .col-md-4
+         .col-md-4
+            br
+            h1.titProd Productos
+            br
+         .col-md-4
+        .row
+          for result in productos
+            .col-md-6.col-lg-3.prod
+              .card(style="")
+                img.card-img-top(src="/img/img1.png", alt="Card image cap") 
+                .card-body
+                  h5.card-title 
+                    | !{result.nombre}
+                  p.card-text
+                    | $!{result.precio}
+                  a.btn.btn-primary(href="/detalle/#{result.id}") Detalles
+                  a.btn.btn-success.ag(onclick="toastr.success('Producto agregado :D');",href='/add/#{result.id}', role='button')
+                    i.fa.fa-shopping-cart(aria-hidden='true')
+                    |  Add to cart

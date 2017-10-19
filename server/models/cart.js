@@ -10,9 +10,10 @@ module.exports = function Cart(cart) {
             cartItem = this.items[id] = {item: item, quantity: 0, price: 0};
         }
         cartItem.quantity++;
-        cartItem.price = cartItem.item.price * cartItem.quantity;
+        cartItem.price = cartItem.item.precio * cartItem.quantity;
+
         this.totalItems++;
-        this.totalPrice += cartItem.item.price;
+        this.totalPrice += cartItem.item.precio;
     };
 
     this.remove = function(id) {
@@ -26,6 +27,6 @@ module.exports = function Cart(cart) {
         for (var id in this.items) {
             arr.push(this.items[id]);
         }
-        return arr;
+      return arr;
     };
 };

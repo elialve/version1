@@ -1,7 +1,10 @@
 #navbarNavDropdown{
   margin-left: 15%;
 }
-#navbarNavDropdown ul li a{
+nav{
+  background:#000
+}
+.mov{
   padding: 10px;
   margin-left: 60px;
 }
@@ -43,4 +46,7 @@
 }
 .fa-pull-right, .pull-right{
   float: left;
+}
+.fa-shopping-cart:before {
+  margin-right: 5px;
 }
