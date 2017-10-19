@@ -1,0 +1,86 @@
+extends ./layouts/layout.jade
+block content     
+    br
+    .container
+      .row
+        .col-lg-3
+        .col-lg-6 
+          h1 Carrito de Compras 
+        .col-lg-3
+      br
+      if productos
+          table.table
+            thead.mdb-color.darken-3
+              tr.text-white.info-color-dark      
+                th Nombre          
+                th Cantidad         
+                th Precio Unitario
+                th Precio Total
+            tbody.table-striped
+               for result in productos
+                tr     
+                  td #{result.item.nombre}        
+                  td #{result.quantity}         
+                  td $#{result.item.precio}
+                  td $#{result.price}
+            tr     
+              td         
+              td         
+              td Total
+              td $#{totalPrice}
+          button.btn.btn-primary.waves-effect.waves-light(type="button", data-toggle="modal", data-target="#modalRegister") Registro
+          #modalRegister.modal.fade(tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
+            .modal-dialog.cascading-modal(role="document")
+              // Content
+              .modal-content
+                // Header
+                .modal-header.light-blue.darken-3.white-text
+                  h4.title
+                    i.fa.fa-user-plus
+                    |  Register
+                  |                     
+                  button.close.waves-effect.waves-light(type="button", data-dismiss="modal", aria-label="Close")
+                    span(aria-hidden="true") ×
+                // Body
+                .modal-body
+                  .md-form.form-sm
+                    i.fa.fa-envelope.prefix
+                    |                         
+                    input#form32.form-control(type="text")
+                    |                         
+                    label(for="form32") Your email
+                  |     
+                  |                     
+                  .md-form.form-sm
+                    i.fa.fa-lock.prefix
+                    |                         
+                    input#form33.form-control(type="password")
+                    |                         
+                    label(for="form33") Your password
+                  |     
+                  |                     
+                  .md-form.form-sm
+                    i.fa.fa-lock.prefix
+                    |                         
+                    input#form34.form-control(type="password")
+                    |                         
+                    label(for="form34") Repeat password
+                  |     
+                  |                     
+                  .text-center.mt-2
+                    button.btn.btn-info
+                      | Sign up 
+                      i.fa.fa-sign-in.ml-1
+                // Footer
+                .modal-footer
+                  .options.text-center.text-md-right.mt-1
+                    p
+                      | Already have an account? 
+                      a(href="#") Log In
+                  |                     
+                  button.btn.btn-outline-info.waves-effect.ml-auto(type="button", data-dismiss="modal") Close
+              // /.Content
+          // Modal: Register Form
+      
+       else
+         h1 No hay productos en el carrito de compras.

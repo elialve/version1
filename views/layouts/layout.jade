@@ -1,0 +1,104 @@
+doctype html
+html(lang="x-default")
+  head
+    title !{title}
+    meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    link(href="/css/bootstrap.min.css", rel="stylesheet")
+    link(rel='stylesheet', href='/font/font-awesome-4.7.0/css/font-awesome.min.css')
+    // Bootstrap core CSS
+    link(href='/css/compiled.min.css', rel='stylesheet')
+    link(href="/css/estilos.css", rel="stylesheet")
+    link(href="/css/main.css", rel="stylesheet")
+    script(type='text/javascript', src='/js/jquery-3.2.1.min.js')
+    
+  body
+      nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.elegant-color-dark
+        .container
+          a.navbar-brand(href="#") 
+           img.d-inline-block.align-top(src="/img/logo.png", width="30", height="30", alt="") 
+           | !{title}
+           button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNavDropdown', aria-controls='navbarNavDropdown', aria-expanded='false', aria-label='Toggle navigation')
+               span.navbar-toggler-icon  
+          #navbarNavDropdown.collapse.navbar-collapse
+                 ul.navbar-nav
+                   li.nav-item.active
+                     a.nav-link.mov(href='/')
+                       | Home 
+                       span.sr-only (current)   
+                   li.nav-item
+                     a.nav-link.mov(href='#') Productos  
+                   li.nav-item
+                     a.nav-link.mov(href='#') Contáctenos   
+                   li.nav-item.dropdown
+                     a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mov(href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                       i.fa.fa-shopping-cart(aria-hidden="true") Cart
+                       if session.cart          
+                        span !{session.cart.totalItems}   
+                     if session.cart
+                       .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
+                         for result in session.cart.items
+                           a.dropdown-item(href='#') #{result.item.nombre} X#{result.quantity} $#{result.price}
+                         a.dropdown-item(href='#') Total: $!{ session.cart.totalPrice }
+                         a.dropdown-item.btn-success(href='/cart/') Pasar por caja
+      
+      block content
+    .Footer.elegant-color-dark
+      script(type="text/javascript", src="/scripts/common-scripts/Combined.js")        
+      .footer-container.elegant-color-dark
+        footer.wrapper
+          .social-mobile
+            ul
+              li.social
+                a(href="http://www.facebook.com", target="_blank")
+                  i.fa.fa-facebook
+                a(href="#", target="_blank")
+                  i.fa.fa-instagram
+                a(href="#", target="_blank")
+                  i.fa.fa-twitter
+                a(href="#", target="_blank")
+                  i.fa.fa-youtube  
+  
+          .menu-wrapper
+            ul
+              li.cat-title Productos 
+              li
+                a(href="http://www.corsair.com/en-eu/where-to-buy", target="") Tarjetas Graficas 
+              li
+                a(href="http://www.corsair.com/en-eu/where-to-buy", target="") Mause 
+                
+          .menu-wrapper
+            ul
+              li.cat-title Informacion
+              li
+                a(href="http://www.corsair.com/en-eu/company/contact", target="") Contáctenos  
+              li
+                a(href="http://www.corsair.com/en-eu/company/about-corsair", target="") About
+             
+          .menu-wrapper
+            ul
+              li.social
+                a(href="http://www.facebook.com/Corsair", target="_blank")
+                  i.fa.fa-facebook
+                a(href="https://www.instagram.com/corsairgaming/", target="_blank")
+                  i.fa.fa-instagram
+                a(href="http://twitter.com/Corsair", target="_blank")
+                  i.fa.fa-twitter
+                a(href="http://youtube.com/CorsairMemoryInc", target="_blank")
+                  i.fa.fa-youtube
+      .legal
+        .wrapper
+          div
+            | Copyright © 2017 Helayias. All rights reserved.
+          div(style="text-align: right")
+            a(href="/en-eu/privacy-policy") Privacy Policy      
+            span.footer-item-spearator -            
+            a(href="/en-eu/term-of-use") Terms of Use
+script(type='text/javascript', src='/js/compiled.min.js')
+|     
+script(type='text/javascript', src='/js/jarallax.js')
+|     
+script(type='text/javascript', src='/js/jarallax-video.js')
+|     
+script.
+  new WOW().init();
+  
