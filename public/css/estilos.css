@@ -50,3 +50,41 @@ nav{
 .fa-shopping-cart:before {
   margin-right: 5px;
 }
+.side-nav .logo-wrapper img {
+    padding: 2% 90px;
+}
+.sn-bg-1 {
+    background-image: none;
+}
+.lista{
+  visibility: hidden;
+}
+a {
+    color: white;
+}
+.imgLogo{
+    margin: 9px auto;
+    display: block;
+}
+h3{
+  color: white;
+  margin: 9px auto;
+  visibility: visible;
+}
+
+@media only screen and (max-width: 992px) {
+  .lista{
+    visibility: visible;
+    height: 45px;
+    width: 45px;
+  }
+  .imgLogo{
+
+  }
+  h3{
+   display: none;
+  }
+  .table td, .table th {
+    padding: 5px;
+  }
+}

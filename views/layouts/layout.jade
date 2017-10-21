@@ -7,18 +7,48 @@ html(lang="x-default")
     link(rel='stylesheet', href='/font/font-awesome-4.7.0/css/font-awesome.min.css')
     // Bootstrap core CSS
     link(href='/css/compiled.min.css', rel='stylesheet')
+    link(href='/css/mdb.min.css', rel='stylesheet')
     link(href="/css/estilos.css", rel="stylesheet")
     link(href="/css/main.css", rel="stylesheet")
+    link(rel="shortcut icon", type="image/png", href="/img/logo.png")
     script(type='text/javascript', src='/js/jquery-3.2.1.min.js')
     
   body
       nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.elegant-color-dark
         .container
-          a.navbar-brand(href="#") 
-           img.d-inline-block.align-top(src="/img/logo.png", width="30", height="30", alt="") 
-           | !{title}
-           button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNavDropdown', aria-controls='navbarNavDropdown', aria-expanded='false', aria-label='Toggle navigation')
-               span.navbar-toggler-icon  
+          a.btn.btn-primary.p-3.button-collapse.lista(href="#", data-activates="slide-out")
+            i.fa.fa-bars
+          ul#slide-out.side-nav.sn-bg-1.custom-scrollbar
+            li
+              .logo-wrapper.waves-light
+                a(href="#")
+                  img.img-fluid.flex-center(src="/img/logo.png")
+            li
+              form.search-form(role="search")
+                .form-group.waves-light
+                  input.form-control(type="text", placeholder="Buscar")
+            li.nav-item.active
+              a.nav-link(href='/')
+                | Home 
+                span.sr-only (current)   
+            li.nav-item
+              a.nav-link(href='#') Productos  
+            li.nav-item
+              a.nav-link(href='#') Contáctenos   
+            li.nav-item.dropdown
+              a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                i.fa.fa-shopping-cart(aria-hidden="true") Cart
+                if session.cart          
+                 span !{session.cart.totalItems}   
+              if session.cart
+                .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
+                  for result in session.cart.items
+                    a.dropdown-item(href='#') #{result.item.nombre} X#{result.quantity} $#{result.price}
+                  a.dropdown-item(href='#') Total: $!{ session.cart.totalPrice }
+                  a.dropdown-item.btn-success(href='/cart/') Pasar por caja
+          a.navbar-brand.imgLogo(href="#") 
+           img.d-inline-block.align-top(src="/img/logo.png", width="39", height="39", alt="") 
+          h3 Box
           #navbarNavDropdown.collapse.navbar-collapse
                  ul.navbar-nav
                    li.nav-item.active
@@ -29,18 +59,52 @@ html(lang="x-default")
                      a.nav-link.mov(href='#') Productos  
                    li.nav-item
                      a.nav-link.mov(href='#') Contáctenos   
-                   li.nav-item.dropdown
-                     a#navbarDropdownMenuLink.nav-link.dropdown-toggle.mov(href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
-                       i.fa.fa-shopping-cart(aria-hidden="true") Cart
-                       if session.cart          
-                        span !{session.cart.totalItems}   
-                     if session.cart
-                       .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
-                         for result in session.cart.items
-                           a.dropdown-item(href='#') #{result.item.nombre} X#{result.quantity} $#{result.price}
-                         a.dropdown-item(href='#') Total: $!{ session.cart.totalPrice }
-                         a.dropdown-item.btn-success(href='/cart/') Pasar por caja
-      
+                   a.btn.btn-primary.nav-link.mov(type="button", data-toggle="modal", data-target="#modalCart")
+                     i.fa.fa-shopping-cart(aria-hidden="true") 
+                     |Cart 
+                     if session.cart          
+                       span !{session.cart.totalItems}   
+                   // Modal: modalCart
+                   if session.cart
+                     #modalCart.modal.fade(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
+                       .modal-dialog(role="document")
+                         .modal-content
+                           // Header
+                           .modal-header
+                             h4#myModalLabel.modal-title Carrito de compras 
+                             |                 
+                             button.close(type="button", data-dismiss="modal", aria-label="Close")
+                               span(aria-hidden="true") ×
+                           // Body
+                           .modal-body
+                             table.table.table-hover
+                               thead
+                                 tr                           
+                                   th Nombre                      
+                                   th Cantidad
+                                   th Precio Total                
+                                   th Remove
+                               tbody
+                                 for result in session.cart.items             
+                                     tr                        
+                                       td #{result.item.nombre}                       
+                                       td(align="right") #{result.quantity}x
+                                       td $#{result.price}                       
+                                       td(align="center")
+                                         a
+                                           i.fa.fa-remove
+                                 tr                        
+                                   td                      
+                                   td 
+                                   td Total:                    
+                                   td $!{session.cart.totalPrice}
+                                   
+                           // Footer
+                           .modal-footer
+                             button.btn.btn-outline-primary(type="button", data-dismiss="modal") Cerrar
+                             |                 
+                             button.btn.btn-primary Realizar pedido
+                     // Modal: modalCart=
       block content
     .Footer.elegant-color-dark
       script(type="text/javascript", src="/scripts/common-scripts/Combined.js")        
@@ -93,12 +157,12 @@ html(lang="x-default")
             a(href="/en-eu/privacy-policy") Privacy Policy      
             span.footer-item-spearator -            
             a(href="/en-eu/term-of-use") Terms of Use
-script(type='text/javascript', src='/js/compiled.min.js')
-|     
-script(type='text/javascript', src='/js/jarallax.js')
-|     
+script(type='text/javascript', src='/js/compiled.min.js')  
+script(type='text/javascript', src='/js/jarallax.js')   
 script(type='text/javascript', src='/js/jarallax-video.js')
-|     
 script.
   new WOW().init();
+script(type="text/javascript", src="/js/mdb.min.js")
+script $(".button-collapse").sideNav(); 
+
   
