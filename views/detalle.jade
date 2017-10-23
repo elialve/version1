@@ -2,4 +2,23 @@ extends ./layouts/layout.jade
 block content 
    .container
      .br
-       h1 Detalle de :D
+       .row
+         .col-lg-6
+           img.card-img-top(src="/img/img1.png", alt="Card image cap") 
+         .col-lg-6
+           br
+           h2 !{productos.nombre}
+           br
+           h5 Marca: MSI
+           h5 Iva: Incluido
+           a.btn.btn-success(onclick="toastr.success('Producto agregado :D');",href='/add/#{productos.id}/2', role='button')
+             i.fa.fa-shopping-cart(aria-hidden='true') 
+             | Agregar al Carro              
+        .row
+          .col-lg-10
+            br 
+            h4 Descripcion
+            p Si tu PC se parece más a una estación de combate que a una herramienta de trabajo, equípate con accesorios de juegos diseñados para anular la competencia. 
+              | Desarrollado siguiendo consejos de los equipos eSports, las prestaciones de alta calidad de esta alfombrilla para ratón y la precisa atención por los detalles marcan la diferencia entre una aplastante victoria y una derrota desgarradora.
+               
+    

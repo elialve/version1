@@ -91,7 +91,7 @@ html(lang="x-default")
                                        td(align="right") #{result.quantity}x
                                        td $#{result.price}                       
                                        td(align="center")
-                                         a
+                                         a(href='/remove/#{result.item._id}')
                                            i.fa.fa-remove
                                  tr                        
                                    td                      
@@ -103,7 +103,7 @@ html(lang="x-default")
                            .modal-footer
                              button.btn.btn-outline-primary(type="button", data-dismiss="modal") Cerrar
                              |                 
-                             button.btn.btn-primary Realizar pedido
+                             a.btn.btn-primary(href='/cart/') Realizar pedido
                      // Modal: modalCart=
       block content
     .Footer.elegant-color-dark

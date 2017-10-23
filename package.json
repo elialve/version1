@@ -25,7 +25,8 @@
     "nodemon": "^1.12.1",
     "router-express": "^1.5.2",
     "styled-bootstrap-mixins": "^0.1.0",
-    "styled-components": "^2.2.1"
+    "styled-components": "^2.2.1",
+    "validator": "^9.0.0"
   },
   "devDependencies": {
     "nodemon": "^1.12.1"

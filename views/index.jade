@@ -21,7 +21,7 @@ block content
                   p.card-text
                     | $!{result.precio}
                   a.btn.btn-primary(href="/detalle/#{result.id}") Detalles
-                  a.btn.btn-success(onclick="toastr.success('Producto agregado :D');",href='/add/#{result.id}', role='button')
+                  a.btn.btn-success(onclick="toastr.success('Producto agregado :D');",href='/add/#{result.id}/1', role='button')
                     i.fa.fa-shopping-cart(aria-hidden='true') 
                     | Agregar al Carro              
                           
