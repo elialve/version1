@@ -14,10 +14,12 @@
   "license": "ISC",
   "dependencies": {
     "cookie-parser": "^1.4.3",
+    "crypto": "^1.0.1",
     "express": "^4.16.1",
     "express-session": "^1.15.6",
     "jade": "^1.11.0",
     "jade-bootstrap": "^1.0.14",
+    "jsonwebtoken": "^8.1.0",
     "lodash": "^4.17.4",
     "mixin": "^0.2.0",
     "mongodb": "^2.2.31",
