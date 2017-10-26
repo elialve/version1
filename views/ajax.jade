@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    script(type='text/javascript', src='/js/jquery-3.2.1.min.js')
+    script.
+        $(document).ready(function() {
+          $('#eso').click(function() {
+            $.ajax({
+              type: "GET",
+              url: "/",
+              success: function(a) {
+                $('#contenido').html(a);
+              }
+            });
+          });
+        });
+
+  body
+    div
+      h2 Let AJAX change this text
+    button#eso Change Content
+    div#contenido

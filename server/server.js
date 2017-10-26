@@ -43,6 +43,11 @@ app.get('/', function (req, res) {
         res.status(400).send(e);
       });
 });
+
+app.get('/ajax', (req, res) => {
+  res.render('ajax');
+});
+
 //Agregar
 app.post('/prodAdd', (req, res) => {
   var prod = new Producto({
@@ -83,21 +88,24 @@ app.get('/detalle/:id', (req, res) => {
       res.status(400).send();
     });
 });
-// Carrito de compras
 
+
+// Carrito de compras
 app.get('/add/:id/:num', function(req, res) {
-  setTimeout(function(){
     var productId = req.params.id;
     var num = req.params.num;
+    console.log('llegue');
     var cart = new Cart(req.session.cart ? req.session.cart : {});
     Producto.findById(productId).then((prod) => {
       if (!prod) {
+        console.log(':C');
         return res.status(404).send();
       }
+      console.log(prod);
       cart.add(prod, productId);
       req.session.cart = cart;
       if (num ==1) {
-          res.redirect("/");
+          res.render('cart2');
       }
       if (num == 2) {
         res.redirect("/detalle/"+productId);
@@ -105,8 +113,6 @@ app.get('/add/:id/:num', function(req, res) {
     }).catch((e) => {
       res.status(400).send();
     });
-  },2000);
-
 });
 
 app.get('/cart', function(req, res) {
@@ -186,6 +192,20 @@ app.post('/users', (req, res) => {
 app.get('/users/me',authenticate, (req, res) =>{
   res.send(req.user);
 });
+
+app.post('/users/login', (req, res) =>{
+  var body =_.pick(req.body, ['email', 'password']);
+
+  User.findByCrentials(body.email, body.password).then((user) => {
+    return user.generateAuthToken().then((token) =>{
+      res.header('x-auth', token).send(user);
+    });
+  }).catch((e) => {
+    res.status(400).send();
+  });
+});
+
+
 app.listen(port, () => {
   console.log('Inicio puerto ', port);
 });

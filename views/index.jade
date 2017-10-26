@@ -1,5 +1,5 @@
 extends ./layouts/layout.jade
-block content                 
+block content       
        .hero(style='max-height: 600px;')
         video#videoHero(autoplay='', loop='', preload='', poster='', style='top: 70px; height: auto; width: 100%;', src='/video/suporte-venonpro-blue.mp4')
        .container( style="background-color: white;")
@@ -21,9 +21,23 @@ block content
                   p.card-text
                     | $!{result.precio}
                   a.btn.btn-primary(href="/detalle/#{result.id}") Detalles
-                  a.btn.btn-success(onclick="toastr.success('Producto agregado :D');",href='/add/#{result.id}/1', role='button')
+                  a.btn.btn-success(id= "#{result.id}", onclick="toastr.success('Producto agregado :D');", role='button')
                     i.fa.fa-shopping-cart(aria-hidden='true') 
-                    | Agregar al Carro              
-                          
-
+                    | Agregar al Carro   
+                    //,href='/add/#{result.id}/1'
+                  script.
+                      $(document).ready(function() {
+                        $('##{result.id}').click(function() {
+                          $.ajax({
+                            type: "get",
+                            url: "/add/#{result.id}/1",
+                            success: function(a) {
+                              $('#contenido').html(a);
+                            }
+                          });
+                        });
+                      });
+                     
+                           
+                    
                   
