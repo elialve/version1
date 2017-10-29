@@ -11,9 +11,23 @@ block content
            br
            h5 Marca: MSI
            h5 Iva: Incluido
-           a.btn.btn-success(onclick="toastr.success('Producto agregado :D');",href='/add/#{productos.id}/2', role='button')
+           a.btn.btn-success(id= "producto" onclick="toastr.success('Producto agregado :D');", role='button')
              i.fa.fa-shopping-cart(aria-hidden='true') 
-             | Agregar al Carro              
+             | Agregar al Carro
+           script.
+               $(document).ready(function() {
+                 $('#producto').click(function() {
+                   $.ajax({
+                     type: "get",
+                     url: "/add/#{productos.id}/2",
+                     success: function(a) {
+                       $('#contenido').html(a);
+                     }
+                   });
+                 });
+               });
+           
+                                  
         .row
           .col-lg-10
             br 

@@ -108,7 +108,7 @@ app.get('/add/:id/:num', function(req, res) {
           res.render('cart2');
       }
       if (num == 2) {
-        res.redirect("/detalle/"+productId);
+        res.render('cart2');
       }
     }).catch((e) => {
       res.status(400).send();
@@ -120,7 +120,11 @@ app.get('/cart', function(req, res) {
     return res.render('cart', {productos: null,title: 'Carrito'});
   }
   var cart = new Cart(req.session.cart);
-  res.render('cart', {productos: cart.getItems(),totalPrice: cart.totalPrice,title: 'Carrito'});
+  if(!req.session.user){
+    res.render('cart', {productos: cart.getItems(),totalPrice: cart.totalPrice,title: 'Carrito', usuario: null});
+  }
+  var user = new User(req.session.user);
+  res.render('cart', {productos: cart.getItems(),totalPrice: cart.totalPrice,title: 'Carrito', usuario: user});
 });
 
 
@@ -178,11 +182,13 @@ app.patch('/prodMod/:id', (req, res) => {
 app.post('/users', (req, res) => {
   var body =_.pick(req.body, ['email', 'password']);
   var user = new User(body);
+  var sessionUser = req.session;
+  sessionUser.user = user;
 
   user.save().then(() => {
     return user.generateAuthToken();
   }).then((token) => {
-    res.header('x-auth', token).send(user);
+    res.render('pedido',{usuario: user});
   }).catch((e) => {
     res.status(400).send(e);
   });
@@ -195,7 +201,6 @@ app.get('/users/me',authenticate, (req, res) =>{
 
 app.post('/users/login', (req, res) =>{
   var body =_.pick(req.body, ['email', 'password']);
-
   User.findByCrentials(body.email, body.password).then((user) => {
     return user.generateAuthToken().then((token) =>{
       res.header('x-auth', token).send(user);
