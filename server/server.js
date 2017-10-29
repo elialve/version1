@@ -117,11 +117,11 @@ app.get('/add/:id/:num', function(req, res) {
 
 app.get('/cart', function(req, res) {
   if (!req.session.cart) {
-    res.render('cart', {productos: null,title: 'Carrito'});
+    return res.render('cart', {productos: null,title: 'Carrito'});
   }
   var cart = new Cart(req.session.cart);
   if(!req.session.user){
-    res.render('cart', {productos: cart.getItems(),totalPrice: cart.totalPrice,title: 'Carrito', usuario: null});
+    return res.render('cart', {productos: cart.getItems(),totalPrice: cart.totalPrice,title: 'Carrito', usuario: null});
   }
   var user = new User(req.session.user);
   res.render('cart', {productos: cart.getItems(),totalPrice: cart.totalPrice,title: 'Carrito', usuario: user});
