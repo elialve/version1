@@ -117,7 +117,7 @@ app.get('/add/:id/:num', function(req, res) {
 
 app.get('/cart', function(req, res) {
   if (!req.session.cart) {
-    return res.render('cart', {productos: null,title: 'Carrito'});
+    res.render('cart', {productos: null,title: 'Carrito'});
   }
   var cart = new Cart(req.session.cart);
   if(!req.session.user){
