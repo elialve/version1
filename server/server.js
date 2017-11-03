@@ -145,7 +145,7 @@ app.get('/modalInfo/:id', function(req, res) {
 
 });
 app.get('/reload', function(req, res) {
-  return res.render('cartMini');
+   res.render('cartMini');
 });
 
 app.get('/cart', function(req, res) {

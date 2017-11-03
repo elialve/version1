@@ -1,0 +1,11 @@
+li.nav-item.dropdown
+  a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+    i.fa.fa-shopping-cart(aria-hidden="true") Cart
+    if session.cart          
+     span !{session.cart.totalItems}   
+  if session.cart
+    .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
+      for result in session.cart.items
+        a.dropdown-item(href='#') #{result.item.nombre} X#{result.quantity} $#{result.price}
+      a.dropdown-item(href='#') Total: $!{ session.cart.totalPrice }
+      a.dropdown-item.btn-success(href='/cart/') Pasar por caja
