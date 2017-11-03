@@ -2,17 +2,20 @@ const _ = require('lodash');
 var express = require('express');
 var bodyParser = require('body-parser');
 var {ObjectID} = require('mongodb');
+var fs = require('fs-extra');
 
 var {mongoose} = require('./db/mongoose.js');
 var {Producto} = require('./models/producto.js');
 var {User} = require('./models/user.js');
 var {authenticate} = require('./middleware/authenticate');
+var mailer = require('express-mailer');
 
 var session = require('express-session');
 var Cart = require('./models/cart.js');
 var cookieParser = require('cookie-parser');
-
+var password= "odinkratos";
 var app = express();
+
 var router = express.Router();
 app.set('view engine', 'jade');
 app.use(express.static('public'));
@@ -30,8 +33,17 @@ app.use(function(req, res, next) {
     res.locals.session = req.session;
     next();
 });
-
-
+mailer.extend(app, {
+  from: 'eliasalveal18@gmail.com',
+  host: 'smtp.gmail.com', // hostname
+  secureConnection: true, // use SSL
+  port: 465, // port for secure SMTP
+  transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
+  auth: {
+    user: 'eliasalveal18@gmail.com',
+    pass: 'josueyuyin'
+  }
+});
 
 app.get('/', function (req, res) {
       Producto.find().then((prod) => {
@@ -49,11 +61,19 @@ app.get('/ajax', (req, res) => {
 });
 
 //Agregar
-app.post('/prodAdd', (req, res) => {
+app.post('/prodAdd/:pass', (req, res) => {
+  var pass =  req.params.pass;
+  if( pass != password) {
+    return res.status(401).send();
+  }
+  var newImg = fs.readFileSync('./public/img/img1.png');
+   // encode the file as a base64 string.
+   var encImg = newImg.toString('base64');
+  // var thumb = new Buffer(encImg).toString('base64');
   var prod = new Producto({
     nombre: req.body.nombre,
     precio: req.body.precio,
-    completed: req.body.completed
+    img: encImg
   });
 
   prod.save().then((doc) => {
@@ -92,6 +112,7 @@ app.get('/detalle/:id', (req, res) => {
 
 // Carrito de compras
 app.get('/add/:id/:num', function(req, res) {
+
     var productId = req.params.id;
     var num = req.params.num;
     console.log('llegue');
@@ -104,15 +125,27 @@ app.get('/add/:id/:num', function(req, res) {
       console.log(prod);
       cart.add(prod, productId);
       req.session.cart = cart;
-      if (num ==1) {
-          res.render('cart2');
-      }
-      if (num == 2) {
-        res.render('cart2');
-      }
+      return res.render('cart2');
     }).catch((e) => {
       res.status(400).send();
     });
+});
+app.get('/modalInfo/:id', function(req, res) {
+   var productId = req.params.id;
+   Producto.findById(productId).then((prod) => {
+     if (!prod) {
+       console.log(':C');
+       return res.status(404).send();
+     }
+     return res.render('modalInfo', {producto: prod});
+   }).catch((e) => {
+     console.log(e);
+     res.status(400).send();
+   });
+
+});
+app.get('/reload', function(req, res) {
+  return res.render('cartMini');
 });
 
 app.get('/cart', function(req, res) {
@@ -134,7 +167,7 @@ app.get('/remove/:id', function(req, res) {
   var cart = new Cart(req.session.cart ? req.session.cart : {});
   cart.remove(productId);
   req.session.cart = cart;
-  res.redirect('/');
+  return res.render('cart2');
 });
 
 //Eliminar
@@ -199,7 +232,7 @@ app.get('/users/me',authenticate, (req, res) =>{
   res.send(req.user);
 });
 
-app.post('/users/login', (req, res) =>{
+app.post('/users/login',(req, res) =>{
   var body =_.pick(req.body, ['email', 'password']);
   User.findByCrentials(body.email, body.password).then((user) => {
     return user.generateAuthToken().then((token) =>{
@@ -210,6 +243,22 @@ app.post('/users/login', (req, res) =>{
   });
 });
 
+app.get('/sendEmail', function (req, res, next) {
+  var user = new User(req.session.user);
+  app.mailer.send('email', {
+    to: user.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
+    subject: 'Test Email', // REQUIRED.
+    otherProperty: 'Other Property' // All additional properties are also passed to the template as local variables.
+  }, function (err) {
+    if (err) {
+      // handle error
+      console.log(err);
+      res.send('There was an error sending the email');
+      return;
+    }
+    res.send('Email Sent');
+  });
+});
 
 app.listen(port, () => {
   console.log('Inicio puerto ', port);

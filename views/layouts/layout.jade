@@ -8,8 +8,8 @@ html(lang="x-default")
     // Bootstrap core CSS
     link(href='/css/compiled.min.css', rel='stylesheet')
     link(href='/css/mdb.min.css', rel='stylesheet')
-    link(href="/css/estilos.css", rel="stylesheet")
     link(href="/css/main.css", rel="stylesheet")
+    link(href="/css/estilos.css", rel="stylesheet")
     link(rel="shortcut icon", type="image/png", href="/img/logo.png")
     script(type='text/javascript', src='/js/jquery-3.2.1.min.js')
     
@@ -34,21 +34,22 @@ html(lang="x-default")
             li.nav-item
               a.nav-link(href='#') Productos  
             li.nav-item
-              a.nav-link(href='#') Contáctenos   
-            li.nav-item.dropdown
-              a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
-                i.fa.fa-shopping-cart(aria-hidden="true") Cart
-                if session.cart          
-                 span !{session.cart.totalItems}   
-              if session.cart
-                .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
-                  for result in session.cart.items
-                    a.dropdown-item(href='#') #{result.item.nombre} X#{result.quantity} $#{result.price}
-                  a.dropdown-item(href='#') Total: $!{ session.cart.totalPrice }
-                  a.dropdown-item.btn-success(href='/cart/') Pasar por caja
+              a.nav-link(href='#') Contáctenos
+            div#contenido2
+              li.nav-item.dropdown
+                a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                  i.fa.fa-shopping-cart(aria-hidden="true") Cart
+                  if session.cart          
+                   span !{session.cart.totalItems}   
+                if session.cart
+                  .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
+                    for result in session.cart.items
+                      a.dropdown-item(href='#') #{result.item.nombre} X#{result.quantity} $#{result.price}
+                    a.dropdown-item(href='#') Total: $!{ session.cart.totalPrice }
+                    a.dropdown-item.btn-success(href='/cart/') Pasar por caja
           a.navbar-brand.imgLogo(href="#") 
            img.d-inline-block.align-top(src="/img/logo.png", width="39", height="39", alt="") 
-          h3 Box
+          h3.titulo Box
           #navbarNavDropdown.collapse.navbar-collapse
                  ul.navbar-nav
                    li.nav-item.active
@@ -63,10 +64,10 @@ html(lang="x-default")
                      a.btn.btn-primary.nav-link.mov(type="button", data-toggle="modal", data-target="#modalCart")
                        i.fa.fa-shopping-cart(aria-hidden="true") 
                        |Cart 
-                       if session.cart          
+                       if session.cart && session.cart.totalItems > 0       
                          span !{session.cart.totalItems}   
                      // Modal: modalCart
-                     if session.cart
+                     if session.cart && session.cart.totalItems > 0
                        #modalCart.modal.fade(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
                          .modal-dialog(role="document")
                            .modal-content
@@ -92,8 +93,34 @@ html(lang="x-default")
                                          td(align="right") #{result.quantity}x
                                          td $#{result.price}                       
                                          td(align="center")
-                                           a(href='/remove/#{result.item._id}')
-                                             i.fa.fa-remove
+                                             a.close(type="button", data-dismiss="modal", aria-label="Close", id ="remove")
+                                               i.fa.fa-remove
+                                         script.
+                                           $(document).ready(function() {
+                                             $('#remove').click(function() {
+                                               $('#your-modal-id').modal('hide');
+                                               $('body').removeClass('modal-open');
+                                               $('.modal-backdrop').remove();
+                                               $.ajax({
+                                                 type: "get",
+                                                 url: "/remove/#{result.item._id}",
+                                                 success: function(a) {
+                                                   $('#contenido').html(a);
+                                                 }
+                                               }).then(function() {
+                                                 $.ajax({
+                                                   type: "get",
+                                                   url: "/reload",
+                                                   success: function(a) {
+                                                     $('#contenido2').html(a);
+                                                   }
+                                                 }).then(function(){
+                                                   $('#modalCart').modal('show');
+                                                 });
+                                               });
+                                             });
+                                           });
+
                                    tr                        
                                      td                      
                                      td 
@@ -106,6 +133,21 @@ html(lang="x-default")
                                |                 
                                a.btn.btn-primary(href='/cart/') Realizar pedido
                        // Modal: modalCart=
+                     else
+                      #modalCart.modal.fade(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
+                        .modal-dialog(role="document")
+                          .modal-content
+                            // Header
+                            .modal-header
+                              h4#myModalLabel.modal-title Carrito de compras 
+                              |                 
+                              button.close(type="button", data-dismiss="modal", aria-label="Close")
+                                span(aria-hidden="true") ×
+                            // Body
+                            .modal-body
+                              h4 No hay productos en el carro de compras.
+                            // Footer
+                            .modal-footer
       block content
     .Footer.elegant-color-dark
       script(type="text/javascript", src="/scripts/common-scripts/Combined.js")        

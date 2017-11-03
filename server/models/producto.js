@@ -11,9 +11,9 @@
      required: true,
      minlength: 1
    },
-   completed:{
-     type: Boolean,
-     required: true,
+   img: {
+   },
+   imagen:{
    }
  });
  // // Paso2:Crear objeto

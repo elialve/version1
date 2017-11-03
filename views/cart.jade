@@ -8,7 +8,7 @@ block content
           h1 Carrito de Compras 
         .col-lg-3
       br
-      if productos
+      if productos 
           table.table
             thead.mdb-color.darken-3
               tr.text-white.info-color-dark      
@@ -18,11 +18,11 @@ block content
                 th Precio Total
             tbody.table-striped
                for result in productos
-                tr     
-                  td #{result.item.nombre}        
-                  td #{result.quantity}         
-                  td $#{result.item.precio}
-                  td $#{result.price}
+                  tr     
+                    td #{result.item.nombre}        
+                    td #{result.quantity}         
+                    td $#{result.item.precio}
+                    td $#{result.price}
             tr     
               td         
               td         
@@ -63,7 +63,8 @@ block content
                        p *Asegurese de ingresar datos de contacto correctos. 
              else
                h4 Registro completado con exito.
-               button.btn.btn-outline-primary Realizar pedido
+               a.btn.btn-outline-primary(href ="/sendEmail" ) Realizar pedido
+
        else
          h1 No hay productos en el carrito de compras.
      script.

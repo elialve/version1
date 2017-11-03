@@ -11,20 +11,45 @@ block content
             br
          .col-md-4
         .row
-          for result in productos
-            .col-md-6.col-lg-3.prod
-              .card(style="")
-                img.card-img-top(src="/img/img1.png", alt="Card image cap") 
-                .card-body
-                  h5.card-title 
+          for result,i in productos
+            .col-lg-4.col-md-12.mb-r
+              .card.card-cascade.wider(style="")
+                .view.overlay.hm-white-slight
+                  img.card-img-top.img-fluid.img-cont.prod(src="data:image/png;base64,#{result.img}")
+                  |                     
+                  a(href="/detalle/#{result.id}")
+                    .mask.flex-center.waves-effect.waves-light
+                      h3.white-text Detalles 
+
+                .card-body.text-center.no-padding
+                  h4.card-title 
                     | !{result.nombre}
-                  p.card-text
-                    | $!{result.precio}
-                  a.btn.btn-primary(href="/detalle/#{result.id}") Detalles
-                  a.btn.btn-success(id= "#{result.id}", onclick="toastr.success('Producto agregado :D');", role='button')
-                    i.fa.fa-shopping-cart(aria-hidden='true') 
-                    | Agregar al Carro   
                     //,href='/add/#{result.id}/1'
+     
+                  .card-footer
+                     span.left  $!{result.precio}
+                     |                         
+                     span.right
+                          
+                       a.btn.btn-success.btnCart(id= "#{result.id}", onclick="toastr.success('Producto agregado :D');", role='button',data-toggle="modal", data-target="##{i}")
+                         i.fa.fa-shopping-cart(aria-hidden='true') 
+                         | Agregar al Carro   
+             div.modal.fade(id="#{i}", tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
+                  .modal-dialog.modal-notify.modal-success(role="document")
+                    .modal-content
+                      .modal-header
+                        p.heading.lead Producto Agregado
+                        |     
+                        |                     
+                        button.close(type="button", data-dismiss="modal", aria-label="Close")
+                          span.white-text(aria-hidden="true") ×
+                      .modal-body
+                        .text-center
+                             h1 !{result.nombre}
+                             img.card-img-top.img-fluid.img-cont.prod(src="data:image/png;base64,#{result.img}")
+                      .modal-footer.justify-content-center
+                        a.btn.btn-primary-modal(type="button", data-dismiss="modal", aria-label="Close") Seguir comprando           
+                        a.btn.btn-outline-secondary-modal.waves-effect(href="/cart/") Realizar pedido
                   script.
                       $(document).ready(function() {
                         $('##{result.id}').click(function() {
@@ -34,10 +59,16 @@ block content
                             success: function(a) {
                               $('#contenido').html(a);
                             }
+                          }).then(function() {
+                            $.ajax({
+                              type: "get",
+                              url: "/reload",
+                              success: function(a) {
+                                $('#contenido2').html(a);
+                              }
+                            });
                           });
                         });
                       });
-                     
-                           
-                    
-                  
+                
+              

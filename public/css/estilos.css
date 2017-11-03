@@ -1,3 +1,5 @@
+
+body { padding-right: 0 !important }
 #navbarNavDropdown{
   margin-left: 15%;
 }
@@ -66,7 +68,7 @@ a {
     margin: 9px auto;
     display: block;
 }
-h3{
+.titulo{
   color: white;
   margin: 9px auto;
   visibility: visible;
@@ -83,6 +85,17 @@ h3{
     background-color: #51b6ff;
     color: #fff;
 }
+.img-cont{
+  height: 360px;
+  width: 320px;
+}
+.hm-white-slight .full-bg-img, .hm-white-slight .mask {
+    background-color: rgba(29, 87, 182, 0.68);
+}
+.btnCart{
+  padding: 10px;
+  margin: 0px;
+}
 @media only screen and (max-width: 992px) {
   .lista{
     visibility: visible;
@@ -92,10 +105,14 @@ h3{
   .imgLogo{
 
   }
-  h3{
+  .titulo{
    display: none;
   }
   .table td, .table th {
     padding: 5px;
+  }
+  .img-cont{
+    height: 100%;
+    width: 100%;
   }
 }

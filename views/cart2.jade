@@ -1,10 +1,10 @@
 a.btn.btn-primary.nav-link.mov(type="button", data-toggle="modal", data-target="#modalCart")
   i.fa.fa-shopping-cart(aria-hidden="true") 
   |Cart 
-  if session.cart          
+  if session.cart && session.cart.totalItems > 0           
     span !{session.cart.totalItems}   
 // Modal: modalCart
-if session.cart
+if session.cart && session.cart.totalItems > 0
   #modalCart.modal.fade(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
     .modal-dialog(role="document")
       .modal-content
@@ -24,14 +24,40 @@ if session.cart
                 th Precio Total                
                 th Remove
             tbody
-              for result in session.cart.items             
+              for result,i in session.cart.items             
                   tr                        
                     td #{result.item.nombre}                       
                     td(align="right") #{result.quantity}x
                     td $#{result.price}                       
                     td(align="center")
-                      a(href='/remove/#{result.item._id}')
+                      a.close(type="button", data-dismiss="modal", aria-label="Close", id ="#{i}",onclick="toastr.warning('Producto Eliminado');")
                         i.fa.fa-remove
+                      script.
+                        $(document).ready(function() {
+                          $('##{i}').click(function() {
+                            $('#your-modal-id').modal('hide');
+                            $('body').removeClass('modal-open');
+                            $('.modal-backdrop').remove();
+                            $.ajax({
+                              type: "get",
+                              url: "/remove/#{result.item._id}",
+                              success: function(a) {
+                                $('#contenido').html(a);
+                              }
+                            }).then(function() {
+                              $.ajax({
+                                type: "get",
+                                url: "/reload",
+                                success: function(a) {
+                                  $('#contenido2').html(a);
+                                }
+                              }).then(function(){
+                                $('#modalCart').modal('show');
+                              });
+                            });
+                          });
+                        });
+
               tr                        
                 td                      
                 td 
@@ -44,3 +70,18 @@ if session.cart
           |                 
           a.btn.btn-primary(href='/cart/') Realizar pedido
   // Modal: modalCart=
+else
+ #modalCart.modal.fade(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
+   .modal-dialog(role="document")
+     .modal-content
+       // Header
+       .modal-header
+         h4#myModalLabel.modal-title Carrito de compras 
+         |                 
+         button.close(type="button", data-dismiss="modal", aria-label="Close")
+           span(aria-hidden="true") ×
+       // Body
+       .modal-body
+         h4 No hay productos en el carro de compras.
+       // Footer
+       .modal-footer              
