@@ -12,8 +12,8 @@ block content
          .col-md-4
         .row
           for result,i in productos
-            .col-lg-4.col-md-12.mb-r
-              .card.card-cascade.wider(style="")
+            .col-lg-3.col-md-12.mb-r
+              .card(style="")
                 .view.overlay.hm-white-slight
                   img.card-img-top.img-fluid.img-cont.prod(src="data:image/png;base64,#{result.img}")
                   |                     
@@ -25,28 +25,27 @@ block content
                   h4.card-title 
                     | !{result.nombre}
                     //,href='/add/#{result.id}/1'
-     
+                  h5
+                    | $!{result.precio}
                   .card-footer
-                     span.left  $!{result.precio}
-                     |                         
-                     span.right
-                          
-                       a.btn.btn-success.btnCart(id= "#{result.id}", onclick="toastr.success('Producto agregado :D');", role='button',data-toggle="modal", data-target="##{i}")
-                         i.fa.fa-shopping-cart(aria-hidden='true') 
-                         | Agregar al Carro   
+                     a.btn.btn-success.btnCart(id= "#{result.id}", onclick="toastr.success('Producto agregado :D');", role='button',data-toggle="modal", data-target="##{i}")
+                       i.fa.fa-shopping-cart(aria-hidden='true') 
+                       | Agregar al Carro   
              div.modal.fade(id="#{i}", tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
                   .modal-dialog.modal-notify.modal-success(role="document")
                     .modal-content
                       .modal-header
-                        p.heading.lead Producto Agregado
+                        p.heading.lead Agregado al carro de ventas
                         |     
                         |                     
                         button.close(type="button", data-dismiss="modal", aria-label="Close")
                           span.white-text(aria-hidden="true") ×
                       .modal-body
                         .text-center
-                             h1 !{result.nombre}
-                             img.card-img-top.img-fluid.img-cont.prod(src="data:image/png;base64,#{result.img}")
+                             img.card-img-top.img-fluid.prod.imgModal(src="data:image/png;base64,#{result.img}")
+                             h4 !{result.nombre}
+                             h4 
+                               strong $!{result.precio}
                       .modal-footer.justify-content-center
                         a.btn.btn-primary-modal(type="button", data-dismiss="modal", aria-label="Close") Seguir comprando           
                         a.btn.btn-outline-secondary-modal.waves-effect(href="/cart/") Realizar pedido

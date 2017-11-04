@@ -1,0 +1,38 @@
+h3 Registro realizado con exito!.
+h4 Es necesario que inicie sesion para continuar.
+
+form#formLogin
+  p.h5.text-center.mb-4 Sign in
+  |     
+  .md-form
+    i.fa.fa-envelope.prefix.grey-text
+    |         
+    input#defaultForm-email.form-control(type="text", name="email")
+    |         
+    label(for="defaultForm-email") Your email
+  |     
+  .md-form
+    i.fa.fa-lock.prefix.grey-text
+    |         
+    input#defaultForm-pass.form-control(type="password", name="password")
+    |         
+    label(for="defaultForm-pass") Your password
+  |     
+  .text-center
+    button.btn.btn-default(id= "btnLog") Login
+// Form login
+script.
+  $(document).ready(function() {
+    $("#btnLog").click(function(){
+       $.ajax({
+              type: "POST",
+              url: "/users/login",
+              data: $("#formLogin").serialize(),
+              success: function(data){
+                  $("#contPed").html(data); // Mostrar la respuestas del script PHP.
+              }
+            });
+       return false; // Evitar ejecutar el submit del formulario.
+    });
+  });
+  

@@ -9,6 +9,7 @@ var {Producto} = require('./models/producto.js');
 var {User} = require('./models/user.js');
 var {authenticate} = require('./middleware/authenticate');
 var mailer = require('express-mailer');
+var validator = require('validator');
 
 var session = require('express-session');
 var Cart = require('./models/cart.js');
@@ -66,7 +67,7 @@ app.post('/prodAdd/:pass', (req, res) => {
   if( pass != password) {
     return res.status(401).send();
   }
-  var newImg = fs.readFileSync('./public/img/img1.png');
+  var newImg = fs.readFileSync('./public/img/img2.png');
    // encode the file as a base64 string.
    var encImg = newImg.toString('base64');
   // var thumb = new Buffer(encImg).toString('base64');
@@ -215,17 +216,23 @@ app.patch('/prodMod/:id', (req, res) => {
 app.post('/users', (req, res) => {
   var body =_.pick(req.body, ['email', 'password']);
   var user = new User(body);
-  var sessionUser = req.session;
-  sessionUser.user = user;
-
+  // console.log(user);
+  if (!validator.isEmail(body.email)) {
+    return res.render('error', {error : 'Por favor ingrese un E-mail válido'});
+  }
+  User.findByEmail(body.email).then((user2) =>{
+    if (user2) {
+      return res.render('error', {error : 'El E-mail ingresado ya existe en el sistema'});
+    }
+  });
   user.save().then(() => {
     return user.generateAuthToken();
   }).then((token) => {
-    res.render('pedido',{usuario: user});
+    res.render('login');
   }).catch((e) => {
     res.status(400).send(e);
   });
-})
+});
 
 
 app.get('/users/me',authenticate, (req, res) =>{
@@ -234,12 +241,15 @@ app.get('/users/me',authenticate, (req, res) =>{
 
 app.post('/users/login',(req, res) =>{
   var body =_.pick(req.body, ['email', 'password']);
+  var sessionUser = req.session;
+  var user = new User(body);
+  sessionUser.user = user;
   User.findByCrentials(body.email, body.password).then((user) => {
     return user.generateAuthToken().then((token) =>{
-      res.header('x-auth', token).send(user);
+      res.render('pedido');
     });
   }).catch((e) => {
-    res.status(400).send();
+    res.render('errorLogin');
   });
 });
 

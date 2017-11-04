@@ -1,6 +1,6 @@
 a.btn.btn-primary.nav-link.mov(type="button", data-toggle="modal", data-target="#modalCart")
   i.fa.fa-shopping-cart(aria-hidden="true") 
-  |Cart 
+  | MI CARRO 
   if session.cart && session.cart.totalItems > 0           
     span !{session.cart.totalItems}   
 // Modal: modalCart
@@ -21,14 +21,14 @@ if session.cart && session.cart.totalItems > 0
               tr                           
                 th Nombre                      
                 th Cantidad
-                th Precio Total                
-                th Remove
+                th Precio Unitario               
+                th Eliminar
             tbody
               for result,i in session.cart.items             
                   tr                        
-                    td #{result.item.nombre}                       
-                    td(align="right") #{result.quantity}x
-                    td $#{result.price}                       
+                    td(align="center") #{result.item.nombre}                       
+                    td(align="center") #{result.quantity}
+                    td(align="center") $#{result.item.precio}                       
                     td(align="center")
                       a.close(type="button", data-dismiss="modal", aria-label="Close", id ="#{i}",onclick="toastr.warning('Producto Eliminado');")
                         i.fa.fa-remove

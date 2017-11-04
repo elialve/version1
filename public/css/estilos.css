@@ -1,5 +1,48 @@
 
 body { padding-right: 0 !important }
+.fixed-bottom, .fixed-top {
+    z-index: 1050 !important ;
+}
+
+.navbar {
+    height: 55px !important;
+}
+.espacio{
+    height: 55px !important;
+}
+.alert-danger, .alert-error {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color: #b94a48;
+    padding: 8px 35px 8px 14px;
+    margin-bottom: 10px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+.error{
+
+}
+.usu{
+  color: white;
+  padding: 10px;
+}
+
+.md-form label.active {
+
+-ms-transform: none !important ;
+
+}
+.espacio2{
+    height: 100px;
+}
+.cartItem{
+
+}
+.close {
+    float:inherit !important;
+}
 #navbarNavDropdown{
   margin-left: 15%;
 }
@@ -8,7 +51,7 @@ nav{
 }
 .mov{
   padding: 10px;
-  margin-left: 60px;
+  margin-left: 40px;
 }
 .hero {
     position: relative;
@@ -44,7 +87,7 @@ nav{
     padding-right: 0px;
 }
 .prod{
-  padding: 10px;
+
 }
 .fa-pull-right, .pull-right{
   float: left;
@@ -68,10 +111,17 @@ a {
     margin: 9px auto;
     display: block;
 }
+.imgModal{
+    height: 120px;
+    width: 120px;
+}
 .titulo{
   color: white;
   margin: 9px auto;
   visibility: visible;
+}
+.inputEliminar{
+  width: 50px;
 }
 .product-view-tabs-item {
     cursor: hand;
@@ -85,9 +135,9 @@ a {
     background-color: #51b6ff;
     color: #fff;
 }
-.img-cont{
-  height: 360px;
-  width: 320px;
+.img-cont {
+    height: 290px;
+    width: 280px;
 }
 .hm-white-slight .full-bg-img, .hm-white-slight .mask {
     background-color: rgba(29, 87, 182, 0.68);

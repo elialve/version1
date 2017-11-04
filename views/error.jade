@@ -1,0 +1,49 @@
+.row
+  .col-lg-4
+      form(id = "formReg")
+        p.h5.text-center.mb-4 Registro
+        |     
+        .md-form.form-sm
+          i.fa.fa-user.prefix.grey-text
+          |         
+          input#nombre.form-control(type="text", name="nombre")
+          |         
+          label(for="orangeForm-name") Nombre
+        br
+        .md-form.form-sm
+          i.fa.fa-envelope.prefix
+          |     
+          input#email.form-control.validate(type="email", name="email")
+          |     
+          label(for="email", data-error="Mal", data-success="ok", required) Email
+        br
+        .md-form.form-sm
+          i.fa.fa-lock.prefix
+          |     
+          input#password.form-control.validate(type="password",name="password",minlength="6", required)
+          |     
+          label(for="password", data-error="Mal", data-success="ok") Contraseña  
+        .text-center
+          button.btn.btn-deep-orange(id = "btnReg") Regístrate
+    .col-lg-8
+           .espacio2
+           p *Para poder comprar primero es necesario que se registre.
+           p *Asegurese de ingresar datos de contacto correctos.
+  .row 
+ .col-lg-12
+   .alert-error
+       h4.error !{error}  
+ script.
+   $(document).ready(function() {
+     $("#btnReg").click(function(){
+        $.ajax({
+               type: "POST",
+               url: "/users",
+               data: $("#formReg").serialize(),
+               success: function(data){
+                   $("#contPed").html(data); // Mostrar la respuestas del script PHP.
+               }
+             });
+        return false; // Evitar ejecutar el submit del formulario.
+     });
+   });

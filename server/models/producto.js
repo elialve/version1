@@ -16,6 +16,7 @@
    imagen:{
    }
  });
+
  // // Paso2:Crear objeto
  //  var newProducto = new Producto({
  //    nombre: 'Msi GE62VR-7RF',

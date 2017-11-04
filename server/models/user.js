@@ -48,7 +48,10 @@ UserSchema.methods.generateAuthToken = function(){
     return token;
   });
 };
-
+UserSchema.methods.valEmail = function(email) {
+  var User = this;
+  
+}
 UserSchema.statics.findByToken = function(token){
   var User = this;
   var decoded;
@@ -98,6 +101,13 @@ UserSchema.statics.findByCrentials = function(email, password) {
     });
   });
 };
+UserSchema.statics.findByEmail = function(email) {
+  var User = this;
+  return User.findOne({email});
+};
+
+
+
 var User = mongoose.model('User', UserSchema);
 
 module.exports = {User}

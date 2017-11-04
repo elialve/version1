@@ -1,5 +1,6 @@
 extends ./layouts/layout.jade
-block content     
+block content
+    div.espacio  
     br
     .container
       .row
@@ -29,58 +30,61 @@ block content
               td Total
               td $#{totalPrice}
           dic#contPed
-            if !usuario
+            if !session.user
               .row
                 .col-lg-4
                     form(id = "formReg")
                       p.h5.text-center.mb-4 Registro
                       |     
-                      .md-form
+                      .md-form.form-sm
                         i.fa.fa-user.prefix.grey-text
                         |         
                         input#nombre.form-control(type="text", name="nombre")
                         |         
-                        label(for="orangeForm-name") Nombre 
-                      |     
-                      .md-form
-                        i.fa.fa-envelope.prefix.grey-text
-                        |         
-                        input#email.form-control(type="text", name="email")
-                        |         
-                        label(for="orangeForm-email") Email
-                      |     
-                      .md-form
-                        i.fa.fa-lock.prefix.grey-text
-                        |         
-                        input#password.form-control(type="password", name="password")
-                        |         
-                        label(for="orangeForm-pass") Contraseña
-                      |     
+                        label(for="orangeForm-name") Nombre
+                      br
+                      .md-form.form-sm
+                        i.fa.fa-envelope.prefix
+                        |     
+                        input#email.form-control.validate(type="email", name="email")
+                        |     
+                        label(for="email", data-error="Mal", data-success="ok", required) Email
+                      br
+                      .md-form.form-sm
+                        i.fa.fa-lock.prefix
+                        |     
+                        input#password.form-control.validate(type="password", name="password", minlength="6", required)
+                        |     
+                        label(for="password", data-error="Mal", data-success="ok") Contraseña  
                       .text-center
                         button.btn.btn-deep-orange(id = "btnReg") Regístrate
                 .col-lg-8
+                       .espacio2
                        p *Para poder comprar primero es necesario que se registre.
-                       p *Asegurese de ingresar datos de contacto correctos. 
-             else
-               h4 Registro completado con exito.
-               a.btn.btn-outline-primary(href ="/sendEmail" ) Realizar pedido
+                       p *Asegurese de ingresar datos de contacto correctos.
+                 script.
+                   $(document).ready(function() {
+                     $("#btnReg").click(function(){
+                        $.ajax({
+                               type: "POST",
+                               url: "/users",
+                               data: $("#formReg").serialize(),
+                               success: function(data){
+                                   $("#contPed").html(data); // Mostrar la respuestas del script PHP.
+                               }
+                             });
+                        return false; // Evitar ejecutar el submit del formulario.
+                     });
+                   });
+                   
+
+            else 
+               a.btn.btn-outline-primary(href ="/sendEmail" ) Realizar pedido     
 
        else
          h1 No hay productos en el carrito de compras.
-     script.
-     $(document).ready(function() {
-       $("#btnReg").click(function(){
-          $.ajax({
-                 type: "POST",
-                 url: "/users",
-                 data: $("#formReg").serialize(),
-                 success: function(data){
-                     $("#contPed").html(data); // Mostrar la respuestas del script PHP.
-                 }
-               });
-          return false; // Evitar ejecutar el submit del formulario.
-       });
-     });
+    
+
   
 
     

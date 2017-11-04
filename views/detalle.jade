@@ -1,5 +1,6 @@
 extends ./layouts/layout.jade
-block content 
+block content
+   div.espacio   
    .container
      .br
        .row
@@ -11,9 +12,27 @@ block content
            br
            h5 Marca: MSI
            h5 Iva: Incluido
-           a.btn.btn-success(id= "producto" onclick="toastr.success('Producto agregado :D');", role='button')
+           a.btn.btn-success(id= "producto" onclick="toastr.success('Producto agregado :D');", role='button',data-toggle="modal", data-target="#modal")
              i.fa.fa-shopping-cart(aria-hidden='true') 
              | Agregar al Carro
+           div.modal.fade(id="modal", tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
+                .modal-dialog.modal-notify.modal-success(role="document")
+                  .modal-content
+                    .modal-header
+                      p.heading.lead Agregado al carro de ventas
+                      |     
+                      |                     
+                      button.close(type="button", data-dismiss="modal", aria-label="Close")
+                        span.white-text(aria-hidden="true") ×
+                    .modal-body
+                      .text-center
+                           img.card-img-top.img-fluid.prod.imgModal(src="data:image/png;base64,#{productos.img}")
+                           h4 !{productos.nombre}
+                           h4 
+                             strong $!{productos.precio}
+                    .modal-footer.justify-content-center
+                      a.btn.btn-primary-modal(type="button", data-dismiss="modal", aria-label="Close") Seguir comprando           
+                      a.btn.btn-outline-secondary-modal.waves-effect(href="/cart/") Realizar pedido
            script.
                $(document).ready(function() {
                  $('#producto').click(function() {
