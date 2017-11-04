@@ -48,8 +48,8 @@ html(lang="x-default")
                     a.dropdown-item(href='#') Total: $!{ session.cart.totalPrice }
                     a.dropdown-item.btn-success(href='/cart/') Pasar por caja
             li.nav-item
-                 if session
-                 h4 #{session.user.email}
+                 if session.user
+                   h4 #{session.user.email}
           a.navbar-brand.imgLogo(href="#") 
            img.d-inline-block.align-top(src="/img/logo.png", width="39", height="39", alt="") 
           h3.titulo Box
