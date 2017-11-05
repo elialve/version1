@@ -31,6 +31,14 @@ script.
               success: function(data){
                   $("#contPed").html(data); // Mostrar la respuestas del script PHP.
               }
+            }).then(function(){
+              $.ajax({
+                type: "get",
+                url: "/reloadUser",
+                success: function(a) {
+                  $('#contUser').html(a);
+                }
+              });
             });
        return false; // Evitar ejecutar el submit del formulario.
     });

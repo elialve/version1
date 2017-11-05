@@ -3,7 +3,10 @@ body { padding-right: 0 !important }
 .fixed-bottom, .fixed-top {
     z-index: 1050 !important ;
 }
-
+.cerrar{
+  position: relative;
+  top:-15px;
+}
 .navbar {
     height: 55px !important;
 }
@@ -110,6 +113,8 @@ a {
 .imgLogo{
     margin: 9px auto;
     display: block;
+    position: relative;
+    top:30px;
 }
 .imgModal{
     height: 120px;
@@ -143,8 +148,13 @@ a {
     background-color: rgba(29, 87, 182, 0.68);
 }
 .btnCart{
-  padding: 10px;
+  padding: 5px;
   margin: 0px;
+}
+.btnLogin{
+  padding: 5px;
+  margin: 0px;
+
 }
 @media only screen and (max-width: 992px) {
   .lista{

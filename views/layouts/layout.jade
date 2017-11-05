@@ -150,10 +150,16 @@ html(lang="x-default")
                             .modal-body
                               h4 No hay productos en el carro de compras.
                             // Footer
-                            .modal-footer
-                  li.nav-item.mov
+                            .modal-footer         
+                  #contUser
                        if session.user
-                        .usu #{session.user.email}          
+                           li.nav-item.mov
+                                if session.user
+                                 .usu #{session.user.email} 
+                                 a.nav-link.mov.cerrar(href='/cerrar') Cerrar Sesion
+                       else     
+                          li.nav-item.mov
+                            a.nav-link.mov(href='/login2/') Iniciar Sesion
       block content
     .Footer.elegant-color-dark
       script(type="text/javascript", src="/scripts/common-scripts/Combined.js")        

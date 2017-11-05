@@ -192,7 +192,12 @@ app.get('/modalInfo/:id', function(req, res) {
 app.get('/reload', function(req, res) {
    res.render('cartMini');
 });
-
+app.get('/reloadUser', function(req, res) {
+   res.render('reloadUser');7
+});
+app.get('/login2', function(req, res) {
+   res.render('login2');
+});
 app.get('/cart', function(req, res) {
   if (!req.session.cart) {
     return res.render('cart', {productos: null,title: 'Carrito'});
@@ -282,7 +287,10 @@ app.post('/users', (req, res) => {
 app.get('/users/me',authenticate, (req, res) =>{
   res.send(req.user);
 });
-
+app.get('/cerrar',(req, res) =>{
+  req.session.destroy();
+  res.redirect('/');
+});
 app.post('/users/login',(req, res) =>{
   var body =_.pick(req.body, ['email', 'password']);
   var sessionUser = req.session;
@@ -290,12 +298,13 @@ app.post('/users/login',(req, res) =>{
   sessionUser.user = user;
   User.findByCrentials(body.email, body.password).then((user) => {
     return user.generateAuthToken().then((token) =>{
-      res.render('pedido');
+        res.render('pedido');
     });
   }).catch((e) => {
     res.render('errorLogin');
   });
 });
+
 
 
 
