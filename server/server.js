@@ -67,7 +67,7 @@ app.get('/sendEmail', function (req, res) {
 
       transporter.sendMail(mailOptions, (error, info) => {
           if (error) {
-              console.log(err);
+              console.log(error);
               res.send('There was an error sending the email');
               return;
           }
