@@ -10,7 +10,7 @@ var {User} = require('./models/user.js');
 var {authenticate} = require('./middleware/authenticate');
 var mailer = require('express-mailer');
 var validator = require('validator');
-
+var nodeMailer = require('nodemailer');
 var session = require('express-session');
 var Cart = require('./models/cart.js');
 var cookieParser = require('cookie-parser');
@@ -34,33 +34,62 @@ app.use(function(req, res, next) {
     res.locals.session = req.session;
     next();
 });
-mailer.extend(app, {
-  from: 'eliasalveal18@gmail.com',
-  host: 'smtp.gmail.com', // hostname
-  secureConnection: true, // use SSL
-  port: 465, // port for secure SMTP
-  transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
-  auth: {
-    user: 'eliasalveal18@gmail.com',
-    pass: 'josueyuyin'
-  }
-});
-app.get('/sendEmail', function (req, res, next) {
-  var user = new User(req.session.user);
-  app.mailer.send('email', {
-    to: user.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
-    subject: 'Test Email', // REQUIRED.
-    otherProperty: 'Other Property' // All additional properties are also passed to the template as local variables.
-  }, function (err) {
-    if (err) {
-      // handle error
-      console.log(err);
-      res.send('There was an error sending the email');
-      return;
-    }
-    res.send('Email Sent');
-  });
-});
+// mailer.extend(app, {
+//   from: 'eliasalveal18@gmail.com',
+//   host: 'smtp.gmail.com', // hostname
+//   secureConnection: true, // use SSL
+//   port: 465, // port for secure SMTP
+//   transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
+//   auth: {
+//     user: 'eliasalveal18@gmail.com',
+//     pass: 'josueyuyin'
+//   }
+// });
+app.get('/sendEmail', function (req, res) {
+      var user = new User(req.session.user);
+      console.log(user.email);
+      let transporter = nodeMailer.createTransport({
+          host: 'smtp.gmail.com',
+          port: 465,
+          secure: true,
+          auth: {
+              user: 'eliasalveal18@gmail.com',
+              pass: 'josueyuyin'
+          }
+      });
+      let mailOptions = {
+          from: '"Elias AlveaL" <eliasalveal18@gmail.com>', // sender address
+          to: user.email, // list of receivers
+          subject: 'Test Email', // Subject line
+          text: 'Hola', // plain text body
+          html: '<b>NodeJS Email Tutorial</b>' // html body
+      };
+
+      transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+              console.log(err);
+              res.send('There was an error sending the email');
+              return;
+          }
+          res.send('Email Sent');
+          });
+      });
+// app.get('/sendEmail', function (req, res, next) {
+//   var user = new User(req.session.user);
+//   app.mailer.send('email', {
+//     to: user.email, // REQUIRED. This can be a comma delimited string just like a normal email to field.
+//     subject: 'Test Email', // REQUIRED.
+//     otherProperty: 'Other Property' // All additional properties are also passed to the template as local variables.
+//   }, function (err) {
+//     if (err) {
+//       // handle error
+//       console.log(err);
+//       res.send('There was an error sending the email');
+//       return;
+//     }
+//     res.send('Email Sent');
+//   });
+// });
 app.get('/', function (req, res) {
       Producto.find().then((prod) => {
           res.render('index', {
