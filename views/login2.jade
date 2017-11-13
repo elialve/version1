@@ -1,49 +1,48 @@
 extends ./layouts/layout.jade
 block content
     div.espacio
-    .container  
-        form#formLogin
-          p.h5.text-center.mb-4 Sign in
-          |     
-          .md-form
-            i.fa.fa-envelope.prefix.grey-text
-            |         
-            input#defaultForm-email.form-control(type="text", name="email")
-            |         
-            label(for="defaultForm-email") Your email
-          |     
-          .md-form
-            i.fa.fa-lock.prefix.grey-text
-            |         
-            input#defaultForm-pass.form-control(type="password", name="password")
-            |         
-            label(for="defaultForm-pass") Your password
-          |     
-          .text-center
-            button.btn.btn-default(id= "btnLog") Login
-        // Form login
-        script.
-          $(document).ready(function() {
-            $("#btnLog").click(function(){
-               $.ajax({
-                      type: "POST",
-                      url: "/users/login",
-                      data: $("#formLogin").serialize(),
-                      success: function(data){
-                          $("#contPed").html(data); // Mostrar la respuestas del script PHP.
-                      }
-                    }).then(function(){
-                      $.ajax({
-                        type: "get",
-                        url: "/reloadUser",
-                        success: function(a) {
-                          $('#contUser').html(a);
+    .container
+      #contPed 
+          form#formLogin
+            p.h5.text-center.mb-4 Sign in
+            |     
+            .md-form
+              i.fa.fa-envelope.prefix.grey-text
+              |         
+              input#defaultForm-email.form-control(type="text", name="email")
+              |         
+              label(for="defaultForm-email") Your email
+            |     
+            .md-form
+              i.fa.fa-lock.prefix.grey-text
+              |         
+              input#defaultForm-pass.form-control(type="password", name="password")
+              |         
+              label(for="defaultForm-pass") Your password
+            |     
+            .text-center
+              button.btn.btn-default(id= "btnLog") Login
+          // Form login
+          script.
+            $(document).ready(function() {
+              $("#btnLog").click(function(){
+                 $.ajax({
+                        type: "POST",
+                        url: "/users/login2",
+                        data: $("#formLogin").serialize(),
+                        success: function(data){
+                            $("#contPed").html(data); // Mostrar la respuestas del script PHP.
                         }
                       }).then(function(){
-                        $(location).attr('href', '/');
+                        $.ajax({
+                          type: "get",
+                          url: "/reloadUser",
+                          success: function(a) {
+                            $('#contUser').html(a);
+                          }
+                        });
                       });
-                    });
-               return false; // Evitar ejecutar el submit del formulario.
+                 return false; // Evitar ejecutar el submit del formulario.
+              });
             });
-          });
       

@@ -1,3 +1,15 @@
 if session
   h4 ha iniciado sesion con exito.
-  a.btn.btn-outline-primary(href ="/sendEmail" ) Realizar pedido
+  a.btn.btn-outline-primary(id = "btnSendEmail") Realizar pedido
+  script.
+    $(document).ready(function() {
+      $("#btnSendEmail").click(function(){
+         $.ajax({
+                type: "POST",
+                url: "/pedidoag",
+                success: function(data){
+                    $("#contPed").html(data); // Mostrar la respuestas del script PHP.
+                }
+              });
+      });
+    });

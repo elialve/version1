@@ -6,6 +6,7 @@ var fs = require('fs-extra');
 
 var {mongoose} = require('./db/mongoose.js');
 var {Producto} = require('./models/producto.js');
+var {Pedido} = require('./models/pedido.js');
 var {User} = require('./models/user.js');
 var {authenticate} = require('./middleware/authenticate');
 var mailer = require('express-mailer');
@@ -47,7 +48,8 @@ app.use(function(req, res, next) {
 // });
 app.get('/sendEmail', function (req, res) {
       var user = new User(req.session.user);
-      console.log(user.email);
+      var pedido = new Pedido(req.session.pedido);
+      console.log(pedido);
       let transporter = nodeMailer.createTransport({
           host: 'smtp.gmail.com',
           port: 465,
@@ -57,12 +59,30 @@ app.get('/sendEmail', function (req, res) {
               pass: 'josueyuyin'
           }
       });
+
+      var productos ="<table >" +"<tr>"+
+        "<th>Nombre</th>"+
+        "<th>Cantidad</th>"+
+        "<th>PrecioUnitario</th>"+
+        "<th>Precio Total</th>"+
+      "</tr>";
+
+      for (var i in pedido.productos) {
+         productos+= "<tr><td>"+pedido.productos[i].item.nombre+"</td>"+
+                     "<td>"+pedido.productos[i].quantity+"</td>"+
+                     "<td>"+pedido.productos[i].item.precio+"</td>"+
+                     "<td>"+pedido.productos[i].price+"</td>"+
+                     "</tr>";
+      }
+      productos+= "</table>";
+
+
       let mailOptions = {
           from: '"Elias AlveaL" <eliasalveal18@gmail.com>', // sender address
           to: user.email, // list of receivers
           subject: 'Test Email', // Subject line
           text: 'Hola', // plain text body
-          html: '<b>NodeJS Email Tutorial</b>' // html body
+          html:  '<h1>Pedido realizado con exito</h1> <br> <p>Total a pagar:'+pedido.precioTotal+"</p> <br> <h2>Productos: </h2>" +productos// html body
       };
 
       transporter.sendMail(mailOptions, (error, info) => {
@@ -71,8 +91,8 @@ app.get('/sendEmail', function (req, res) {
               res.send('There was an error sending the email');
               return;
           }
-          res.send('Email Sent');
-          });
+          res.render('pedidoSuccess');
+        });
       });
 // app.get('/sendEmail', function (req, res, next) {
 //   var user = new User(req.session.user);
@@ -122,10 +142,38 @@ app.post('/prodAdd/:pass', (req, res) => {
   });
 
   prod.save().then((doc) => {
-    res.send(doc);
+    res.redirect('/sendEmail/'+doc)
   }, (e) => {
     res.status(400).send(e);
   });
+});
+app.get('/pedidoag',(req, res) =>{
+  var cart = new Cart(req.session.cart);
+  var user = new User(req.session.user);
+
+  var sePedido = req.session;
+  var pedido = new Pedido({
+    email: user.email,
+    productos: cart.getItems(),
+    precioTotal: cart.totalPrice
+  });
+  sePedido.pedido = pedido;
+  pedido.save().then((ped) => {
+    res.redirect("/sendEmail/");
+  }, (e) => {
+    res.status(400).send(e);
+  });
+});
+app.get('/cart', function(req, res) {
+  if (!req.session.cart) {
+    return res.render('cart', {productos: null,title: 'Carrito'});
+  }
+  var cart = new Cart(req.session.cart);
+  if(!req.session.user){
+    return res.render('cart', {productos: cart.getItems(),totalPrice: cart.totalPrice,title: 'Carrito', usuario: null});
+  }
+  var user = new User(req.session.user);
+  res.render('cart', {productos: cart.getItems(),totalPrice: cart.totalPrice,title: 'Carrito', usuario: user});
 });
 
 //Listar
@@ -160,14 +208,14 @@ app.get('/add/:id/:num', function(req, res) {
 
     var productId = req.params.id;
     var num = req.params.num;
-    console.log('llegue');
+    // console.log('llegue');
     var cart = new Cart(req.session.cart ? req.session.cart : {});
     Producto.findById(productId).then((prod) => {
       if (!prod) {
         console.log(':C');
         return res.status(404).send();
       }
-      console.log(prod);
+      // console.log(prod);
       cart.add(prod, productId);
       req.session.cart = cart;
       return res.render('cart2');
@@ -197,17 +245,6 @@ app.get('/reloadUser', function(req, res) {
 });
 app.get('/login2', function(req, res) {
    res.render('login2');
-});
-app.get('/cart', function(req, res) {
-  if (!req.session.cart) {
-    return res.render('cart', {productos: null,title: 'Carrito'});
-  }
-  var cart = new Cart(req.session.cart);
-  if(!req.session.user){
-    return res.render('cart', {productos: cart.getItems(),totalPrice: cart.totalPrice,title: 'Carrito', usuario: null});
-  }
-  var user = new User(req.session.user);
-  res.render('cart', {productos: cart.getItems(),totalPrice: cart.totalPrice,title: 'Carrito', usuario: user});
 });
 
 
@@ -293,18 +330,34 @@ app.get('/cerrar',(req, res) =>{
 });
 app.post('/users/login',(req, res) =>{
   var body =_.pick(req.body, ['email', 'password']);
-  var sessionUser = req.session;
   var user = new User(body);
-  sessionUser.user = user;
+  if (req.session.user) {
+    return res.render('errorLogin', {error: 'Ya ingreso!'});
+  }
+  var sessionUser = req.session;
+
   User.findByCrentials(body.email, body.password).then((user) => {
-    return user.generateAuthToken().then((token) =>{
-        res.render('pedido');
-    });
+     sessionUser.user = user;
+     return res.render('pedido');
   }).catch((e) => {
-    res.render('errorLogin');
+    return res.render('errorLogin');
   });
 });
+app.post('/users/login2',(req, res) =>{
+  var body =_.pick(req.body, ['email', 'password']);
+  var user = new User(body);
+  if (req.session.user) {
+    return res.render('errorLogin2', {error: 'Ya ingreso!'});
+  }
+  var sessionUser = req.session;
 
+  User.findByCrentials(body.email, body.password).then((user) => {
+     sessionUser.user = user;
+    return res.render('successLogin');
+  }).catch((e) => {
+    return res.render('errorLogin2');
+  });
+});
 
 
 

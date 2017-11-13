@@ -110,12 +110,24 @@ nav{
 a {
     color: white;
 }
-.imgLogo{
+/*.imgLogo{
     margin: 9px auto;
     display: block;
     position: relative;
-    top:30px;
+}*/
+ .navbar-brand {
+  height: 40px !important;
 }
+
+.nav >li >a {
+  padding-top: 30px !important;
+  padding-bottom: 30px !important;
+}
+.navbar-toggle {
+  padding: 10px !important;
+  margin: 25px 15px 25px 0 !important;
+}
+
 .imgModal{
     height: 120px;
     width: 120px;
@@ -154,6 +166,11 @@ a {
 .btnLogin{
   padding: 5px;
   margin: 0px;
+
+}
+.navbar .navbar-brand {
+  -webkit-align-self: none !important;
+  align-self: center !important;
 
 }
 @media only screen and (max-width: 992px) {
