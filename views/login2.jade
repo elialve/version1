@@ -5,44 +5,84 @@ block content
       #contPed 
           form#formLogin
             p.h5.text-center.mb-4 Sign in
-            |     
             .md-form
-              i.fa.fa-envelope.prefix.grey-text
-              |         
-              input#defaultForm-email.form-control(type="text", name="email")
-              |         
+              i.fa.fa-envelope.prefix.grey-text      
+              input.form-control(type="text", name="email", id="email", required="true")
               label(for="defaultForm-email") Your email
-            |     
+            p#emailRes
             .md-form
               i.fa.fa-lock.prefix.grey-text
-              |         
-              input#defaultForm-pass.form-control(type="password", name="password")
-              |         
+              input.form-control(type="password", name="password", id="pass" ,required="true", maxlength="6", minlength="0")
               label(for="defaultForm-pass") Your password
-            |     
+              p#passRes
             .text-center
               button.btn.btn-default(id= "btnLog") Login
-          // Form login
+      
           script.
             $(document).ready(function() {
-              $("#btnLog").click(function(){
-                 $.ajax({
-                        type: "POST",
-                        url: "/users/login2",
-                        data: $("#formLogin").serialize(),
-                        success: function(data){
-                            $("#contPed").html(data); // Mostrar la respuestas del script PHP.
-                        }
-                      }).then(function(){
-                        $.ajax({
-                          type: "get",
-                          url: "/reloadUser",
-                          success: function(a) {
-                            $('#contUser').html(a);
-                          }
-                        });
+                  var valEmail = false;
+                    $("#email").blur(function validateEmail(e) {
+                      $("#emailRes").text("");
+                      var email = $("#email").val();
+                      var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                      if (re.test(email)) {
+                        $("#emailRes").text(email + " is valid :)");
+                        $("#email").css("color", "green");
+                        $("#email").css("box-shadow", "0px 1px 0px 0px green");
+                        $("#email").css("border-color", "green");
+                        valEmail = true;
+                      
+                      } else {
+                        $("#emailRes").text(email + " is not valid :(");
+                        $("#email").css("color", "red");
+                        $("#email").css("box-shadow", "0px 1px 0px 0px red");
+                        $("#email").css("border-color", "red");
+                          e.preventDefault();
+                          valEmail = false;  
+                      }
                       });
-                 return false; // Evitar ejecutar el submit del formulario.
-              });
-            });
+                      $("#pass").blur(function validatePass(e) {
+                        $("#passRes").text("");
+                           var pass = $("#pass").val();
+                           valPass = false;
+                           if (pass.length==6) {
+                             $("#passRes").text("es valido :)");
+                             $("#pass").css("color", "green");
+                             $("#pass").css("box-shadow", "0px 1px 0px 0px green");
+                             $("#pass").css("border-color", "green");
+                             valPass = true;
+                           } else {
+                             $("#passRes").text("Debe tener un largo de 6 caracteres");
+                             $("#pass").css("color", "red");
+                             $("#pass").css("box-shadow", "0px 1px 0px 0px red");
+                             $("#pass").css("border-color", "red");
+                               e.preventDefault();
+                               valPass = false;   
+                           }
+                        });
+                    $("#btnLog").click(function(e){
+                        if (!valEmail || !valPass) {
+                           return false; 
+                        }
+                           $.ajax({
+                                  type: "POST",
+                                  url: "/users/login2",
+                                  data: $("#formLogin").serialize(),
+                                  success: function(data){
+                                      $("#contPed").html(data); // Mostrar la respuestas del script PHP.
+                                  }
+                                }).then(function(){
+                                  $.ajax({
+                                    type: "get",
+                                    url: "/reloadUser",
+                                    success: function(a) {
+                                      $('#contUser').html(a);
+                                    }
+                                  });
+                                });
+                          return false;      
+                    });
+                  }); 
+            
+        
       

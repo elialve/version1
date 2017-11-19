@@ -88,7 +88,7 @@ app.get('/sendEmail', function (req, res) {
       transporter.sendMail(mailOptions, (error, info) => {
           if (error) {
               console.log(error);
-              res.send('There was an error sending the email');
+              res.render('pedidoError');
               return;
           }
           res.render('pedidoSuccess');
@@ -241,12 +241,45 @@ app.get('/reload', function(req, res) {
    res.render('cartMini');
 });
 app.get('/reloadUser', function(req, res) {
-   res.render('reloadUser');7
+   res.render('reloadUser');
 });
 app.get('/login2', function(req, res) {
    res.render('login2');
 });
+app.get('/contactenos', function(req, res) {
+   res.render('contactenos');
+});
+app.post('/sendContac', function(req, res) {
+  
+    var body =_.pick(req.body, ['nombre', 'email','tema','mensaje']);
+    let transporter = nodeMailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
+        auth: {
+            user: 'eliasalveal18@gmail.com',
+            pass: 'josueyuyin'
+        }
+    });
 
+
+
+    let mailOptions = {
+        from: '"Elias AlveaL" <eliasalveal18@gmail.com>', // sender address
+        to: 'eliasalveal18@gmail.com', // list of receivers
+        subject: body.tema, // Subject line
+        html:  '<h2>Nombre: '+body.nombre+'</h2>'+'<h2> Email: '+body.email+'</h2>'+'<h3>Mensaje: '+body.mensaje+'</h3>'// html body
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log(error);
+            res.render('contactError');
+            return;
+        }
+        res.render('contactSuccess');
+      });
+});
 
 app.get('/remove/:id', function(req, res) {
   var productId = req.params.id;

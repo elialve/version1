@@ -62,7 +62,7 @@ html(lang="x-default")
                    li.nav-item
                      a.nav-link.mov(href='#') Productos  
                    li.nav-item
-                     a.nav-link.mov(href='#') Contáctenos
+                     a.nav-link.mov(href='/contactenos') Contáctenos
                   div#contenido
                      a.btn.btn-primary.nav-link.mov(type="button", data-toggle="modal", data-target="#modalCart")
                        i.fa.fa-shopping-cart(aria-hidden="true") 
@@ -159,8 +159,8 @@ html(lang="x-default")
                                  a.nav-link.mov.cerrar(href='/cerrar') Cerrar Sesion
                        else     
                           li.nav-item.mov
-                            a.nav-link.mov(href='/login2/') Iniciar Sesion
-
+                            a(href='/login2/') Iniciar Sesion
+                            a.reg(href='/registro/') Registrarse
                             
                       
       block content
