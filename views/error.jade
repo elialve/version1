@@ -1,31 +1,34 @@
 .row
-  .col-lg-4
+  .col-lg-8
       form(id = "formReg")
         p.h5.text-center.mb-4 Registro
         |     
         .md-form.form-sm
           i.fa.fa-user.prefix.grey-text
           |         
-          input#nombre.form-control(type="text", name="nombre")
+          input.form-control(id="nombre", type="text", name="nombre", required)
           |         
           label(for="orangeForm-name") Nombre
+          p#nombreRes
         br
         .md-form.form-sm
           i.fa.fa-envelope.prefix
           |     
-          input#email.form-control.validate(type="email", name="email")
+          input.form-control(id="email", type="email", name="email", required)
           |     
-          label(for="email", data-error="Mal", data-success="ok", required) Email
+          label(for="email") Email 
+          p#emailRes
         br
         .md-form.form-sm
           i.fa.fa-lock.prefix
           |     
-          input#password.form-control.validate(type="password",name="password",minlength="6", required)
+          input.form-control(id="pass", type="password", name="password",maxlength="6", required)
           |     
-          label(for="password", data-error="Mal", data-success="ok") Contraseña  
+          label(for="password") Contraseña  
+          p#passRes
         .text-center
           button.btn.btn-deep-orange(id = "btnReg") Regístrate
-    .col-lg-8
+    .col-lg-4
            .espacio2
            p *Para poder comprar primero es necesario que se registre.
            p *Asegurese de ingresar datos de contacto correctos.
@@ -33,17 +36,86 @@
  .col-lg-12
    .alert-error
        h4.error !{error}  
- script.
-   $(document).ready(function() {
-     $("#btnReg").click(function(){
-        $.ajax({
-               type: "POST",
-               url: "/users",
-               data: $("#formReg").serialize(),
-               success: function(data){
-                   $("#contPed").html(data); // Mostrar la respuestas del script PHP.
-               }
+   script.
+     $(document).ready(function() {
+       $("#email").blur(function validateEmail(e) {
+         $("#emailRes").text("");
+         var email = $("#email").val();
+         var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+         if (re.test(email)) {
+           $("#email").css("color", "green");
+           $("#email").css("box-shadow", "0px 1px 0px 0px green");
+           $("#email").css("border-color", "green");
+           valEmail = true;
+         }else{
+           $("#emailRes").text(email + " No es valido :(");
+           $( "#email" ).focus();
+           $("#email").css("color", "red");
+           $("#email").css("box-shadow", "0px 1px 0px 0px red");
+           $("#email").css("border-color", "red");
+            e.preventDefault();
+            valEmail = false;
+         }
+         });
+         $("#pass").blur(function validatePass(e) {
+           $("#passRes").text("");
+              var pass = $("#pass").val();
+              valPass = false;
+              if (pass.length==6) {
+                $("#passRes").text("es valido :)");
+                $("#pass").css("color", "green");
+                $("#pass").css("box-shadow", "0px 1px 0px 0px green");
+                $("#pass").css("border-color", "green");
+                valPass = true;
+              } else {
+                $("#passRes").text("Debe tener un largo de 6 caracteres");
+                $("#pass").css("color", "red");
+                $("#pass").focus();
+                $("#pass").css("box-shadow", "0px 1px 0px 0px red");
+                $("#pass").css("border-color", "red");
+                  e.preventDefault();
+                  valPass = false;   
+              }
+           });
+           
+           $("#nombre").blur(function validatePass(e) {
+             $("#nombreRes").text("");
+                var nombre = $("#nombre").val();
+                if (nombre.length>2) {
+                  $("#nombre").css("cssText", "color: green !important");
+                  $("#nombre").css("box-shadow", "0px 1px 0px 0px green");
+                  $("#nombre").css("border-color", "green");
+                  valNombre = true;
+                } else if (nombre.length<=2 && nombre.length>0) {
+                  $("#nombreRes").text("Debe tener un largo mayor de 2 carac.");
+                  $("#nombre").css("color", "red");
+                  $("#nombre").focus();
+                  $("#nombre").css("box-shadow", "0px 1px 0px 0px red");
+                  $("#nombre").css("border-color", "red");
+                    e.preventDefault();
+                    valNombre = false;  
+                } else {
+                  $("#nombreRes").text("Debes ingresar tu nombre");
+                  $("#nombre").css("color", "red");
+                  $("#nombre").focus();
+                  $("#nombre").css("box-shadow", "0px 1px 0px 0px red");
+                  $("#nombre").css("border-color", "red");
+                    e.preventDefault();
+                    valNombre = false;   
+                }
              });
-        return false; // Evitar ejecutar el submit del formulario.
+       $("#btnReg").click(function(){
+         if (!valEmail || !valPass || !valNombre) {
+            return false; 
+         }
+          $.ajax({
+                 type: "POST",
+                 url: "/users",
+                 data: $("#formReg").serialize(),
+                 success: function(data){
+                     $("#contPed").html(data); // Mostrar la respuestas del script PHP.
+                 }
+               });
+          return false; // Evitar ejecutar el submit del formulario.
+       });
      });
-   });

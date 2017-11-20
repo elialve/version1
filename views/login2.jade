@@ -1,5 +1,10 @@
 extends ./layouts/layout.jade
 block content
+  if session.user 
+    script.
+      window.setTimeout(window.location.href = "/",95000000);
+  else
+    div.espacio
     div.espacio
     .container
       #contPed 
@@ -17,7 +22,7 @@ block content
               p#passRes
             .text-center
               button.btn.btn-default(id= "btnLog") Login
-      
+     div.espacio
           script.
             $(document).ready(function() {
                   var valEmail = false;

@@ -249,8 +249,12 @@ app.get('/login2', function(req, res) {
 app.get('/contactenos', function(req, res) {
    res.render('contactenos');
 });
+app.get('/registro', function(req, res) {
+
+   res.render('registro');
+});
 app.post('/sendContac', function(req, res) {
-  
+
     var body =_.pick(req.body, ['nombre', 'email','tema','mensaje']);
     let transporter = nodeMailer.createTransport({
         host: 'smtp.gmail.com',
@@ -277,7 +281,7 @@ app.post('/sendContac', function(req, res) {
             res.render('contactError');
             return;
         }
-        res.render('contactSuccess');
+        return res.render('contactSuccess');
       });
 });
 
@@ -347,9 +351,9 @@ app.post('/users', (req, res) => {
   user.save().then(() => {
     return user.generateAuthToken();
   }).then((token) => {
-    res.render('login');
+    return res.render('login');
   }).catch((e) => {
-    res.status(400).send(e);
+    return res.status(400).send(e);
   });
 });
 

@@ -1,4 +1,4 @@
-if session
+if session.user && session.cart
   h4 ha iniciado sesion con exito.
   a.btn.btn-outline-primary(id = "btnSendEmail") Realizar pedido
   script.
@@ -13,3 +13,7 @@ if session
               });
       });
     });
+else
+  script.
+    window.setTimeout(window.location.href = "/",95000000);
+  
