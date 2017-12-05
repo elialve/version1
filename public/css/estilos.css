@@ -26,7 +26,7 @@ body { padding-right: 0 !important }
 }
 .error{
 
-}
+}+
 .usu{
   color: white;
   padding: 10px;
@@ -42,6 +42,11 @@ body { padding-right: 0 !important }
 }
 .cartItem{
 
+}
+.cantidad{
+    float: none;
+    width: 44px !important;
+    margin-left: 0;
 }
 .close {
     float:inherit !important;

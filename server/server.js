@@ -294,6 +294,43 @@ app.get('/remove/:id', function(req, res) {
   return res.render('cart2');
 });
 
+app.get('/remov/:id', function(req, res) {
+  var productId = req.params.id;
+  console.log(productId);
+  console.log('llegue!!!!!!');
+  var cart = new Cart(req.session.cart ? req.session.cart : {});
+  cart.remove(productId);
+  req.session.cart = cart;
+  if (!req.session.cart || cart.getItems().length == 0 ) {
+    return res.render('cart3', {productos: null,title: 'Carrito'});
+  }
+  var cart = new Cart(req.session.cart);
+  if(!req.session.user){
+    return res.render('cart3', {productos: cart.getItems(),totalPrice: cart.totalPrice,title: 'Carrito', usuario: null});
+  }
+  var user = new User(req.session.user);
+  res.render('cart3', {productos: cart.getItems(),totalPrice: cart.totalPrice,title: 'Carrito', usuario: user});
+
+});
+app.get('/update/:id/:cant', function(req, res) {
+  var productId = req.params.id;
+  var cant = req.params.cant;
+  console.log(productId);
+  console.log('llegue!!!!!!'+cant);
+  var cart = new Cart(req.session.cart ? req.session.cart : {});
+  cart.update(productId, cant);
+  req.session.cart = cart;
+  if (!req.session.cart || cart.getItems().length == 0 ) {
+    return res.render('cart3', {productos: null,title: 'Carrito'});
+  }
+  var cart = new Cart(req.session.cart);
+  if(!req.session.user){
+    return res.render('cart3', {productos: cart.getItems(),totalPrice: cart.totalPrice,title: 'Carrito', usuario: null});
+  }
+  var user = new User(req.session.user);
+  res.render('cart3', {productos: cart.getItems(),totalPrice: cart.totalPrice,title: 'Carrito', usuario: user});
+
+});
 //Eliminar
 app.delete('/prodDel/:id',(req, res) =>{
   var id = req.params.id;

@@ -2,7 +2,7 @@ extends ./layouts/layout.jade
 block content
     div.espacio  
     br
-    .container
+    .container#conta
       .row
         .col-lg-3
         .col-lg-6 
@@ -17,13 +17,60 @@ block content
                 th Cantidad         
                 th Precio Unitario
                 th Precio Total
+                th Remover
             tbody.table-striped
-               for result in productos
+               for result,i in productos
                   tr     
                     td #{result.item.nombre}        
-                    td #{result.quantity}         
+                    td 
+                      input.cantidad(type="number",name="cant",id="#{i}cant",value="#{result.quantity}")
+                      a(id ="#{i}up")
+                        i.fa.fa-refresh(aria-hidden='true')
                     td $#{result.item.precio}
                     td $#{result.price}
+                    td
+                        a.close(id ="#{i}")
+                           i.fa.fa-remove
+                      
+                      script.
+                        $(document).ready(function() {
+                            $('##{i}').click(function() {
+                                $.ajax({
+                                  type: "get",
+                                  url: "/remov/#{result.item._id}",
+                                  success: function(a) {
+                                    $('#conta').html(a);
+                                  }
+                                }).then(function(){
+                                  $.ajax({
+                                    type:"get",
+                                    url:"/reload",
+                                    success: function(a) {
+                                      $('#contenido2').html(a);
+                                    }
+                                  });
+                                });
+                            });
+                            var cant = document.getElementById("#{i}cant");
+                            $('##{i}up').click(function() {
+                                $.ajax({
+                                  type: "get",
+                                  url: "/update/#{result.item._id}/"+cant.value,
+                                  success: function(a) {
+                                    $('#conta').html(a);
+                                  }
+                                }).then(function(){
+                                  $.ajax({
+                                    type:"get",
+                                    url:"/reload",
+                                    success: function(a) {
+                                      $('#contenido2').html(a);
+                                    }
+                                  });
+                                });
+                            });
+                        });
+                      
             tr     
               td         
               td         
